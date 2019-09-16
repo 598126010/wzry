@@ -211,7 +211,7 @@
             <!-- 未登录时候显示 <div class="con">您没有登录论坛，请登录后再进行回复</div>-->
 
             <!-- 登录后显示评论输入框-->
-            <form action="#" method="post">
+            <form action="${pageContext.request.contextPath}/article/reply?replyContent=xxx&replyUserName=xxx&" method="post">
                 <div class="con con-loged">
                     <div class="con-t">
                         <textarea id="content" name="commentContent" placeholder="请在此输入您要回复的信息"></textarea>
@@ -234,7 +234,7 @@
 
 
 <!-- 回复弹出框 -->
-<form action="" method="post">
+<form action="${pageContext.request.contextPath}/" method="post">
     <div class="pop-box ft-box">
         <div class="mask"></div>
         <div class="win">

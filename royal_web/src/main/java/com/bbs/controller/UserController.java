@@ -227,4 +227,12 @@ public class UserController {
         Integer count = userService.getCount(user.getUserName());
         return count;
     }
+
+    //跳转到申请板块
+    @RequestMapping("/findZoneApply.do")
+    public String findZoneApply(){
+        return "zoneApply";
+    }
+
+
 }

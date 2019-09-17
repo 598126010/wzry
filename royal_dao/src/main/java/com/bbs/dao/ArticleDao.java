@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface ArticleDao {
-    @Insert("insert into bbs_reply_table(replyContent,replyUserName) values(#{replyContent},#{replyUserName})")
+    @Insert("insert into bbs_reply_table(commentId,replyContent,replyUserName) values(#{commentId},#{replyContent},#{replyUserName})")
     void saveReply(Reply reply);
     @Insert("insert into bbs_comment_table(commentContent,commentUserName,articleId) values(#{commentContent},#{commentUserName},#{articleId})")
     void saveComment(Comment comment);
@@ -23,4 +23,6 @@ public interface ArticleDao {
     void createNewArticle(Article article);
     @Select("select * from  bbs_article_table where articleId = #{id}")
     Article findArticleByArticleId(int id);
+    @Select("select * from bbs_reply_table where commentId = #{commentId}")
+    List<Reply> findReplyByCommentId(Integer commentId);
 }

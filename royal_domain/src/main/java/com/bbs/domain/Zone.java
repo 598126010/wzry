@@ -34,4 +34,13 @@ public class Zone {
     public void setIsDef(Integer isDef) {
         this.isDef = isDef;
     }
+
+    @Override
+    public String toString() {
+        return "Zone{" +
+                "zoneId=" + zoneId +
+                ", zoneName='" + zoneName + '\'' +
+                ", isDef=" + isDef +
+                '}';
+    }
 }

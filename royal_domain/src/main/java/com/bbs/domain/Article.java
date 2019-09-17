@@ -1,7 +1,5 @@
 package com.bbs.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 /**
@@ -120,5 +118,22 @@ public class Article {
 
     public void setIsReport(Integer isReport) {
         this.isReport = isReport;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId=" + articleId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", sendTime=" + sendTime +
+                ", senderName='" + senderName + '\'' +
+                ", isTop=" + isTop +
+                ", replyCount=" + replyCount +
+                ", upvoteCount=" + upvoteCount +
+                ", browseCount=" + browseCount +
+                ", zoneId=" + zoneId +
+                ", isReport=" + isReport +
+                '}';
     }
 }

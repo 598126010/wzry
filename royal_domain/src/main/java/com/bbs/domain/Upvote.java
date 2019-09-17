@@ -34,4 +34,13 @@ public class Upvote {
     public void setIsUpvote(Integer isUpvote) {
         this.isUpvote = isUpvote;
     }
+
+    @Override
+    public String toString() {
+        return "Upvote{" +
+                "upvoteUserName='" + upvoteUserName + '\'' +
+                ", upvoteArticleId=" + upvoteArticleId +
+                ", isUpvote=" + isUpvote +
+                '}';
+    }
 }

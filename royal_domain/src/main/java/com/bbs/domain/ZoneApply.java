@@ -54,4 +54,15 @@ public class ZoneApply {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "ZoneApply{" +
+                "applyZoneId=" + applyZoneId +
+                ", zoneName='" + zoneName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", reason='" + reason + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

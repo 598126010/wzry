@@ -92,7 +92,7 @@
 
 
                 <!-- 评论部分,一楼及以后 -->
-                <c:forEach items="${commentList}" var="list" varStatus="i">
+                <c:forEach items="${commentList}" var="list" varStatus="lou">
                     <li class="floor clearfix">
                         <div class="floorer-info l">
                             <div class="floorer-photo"><img src="images/default.png"/></div>
@@ -101,7 +101,7 @@
                         <div class="floor-con l">
                             <div class="floor-info clearfix">
                                 <div class="floor-time l">回贴时间：${list.commentTime}</div>
-                                <div class="r">${i}楼</div>
+                                <div class="r">${lou.index+1}楼</div>
                             </div>
                             <div class="floor-art-ans">
                                 <div class="floor-art">
@@ -109,21 +109,20 @@
                                 </div>
                                 <div class="floor-ans">
                                     <ul>
-
-                                        <!-- 回复部分,楼中楼 -->
-                                        <li class="clearfix">
-                                            <div class="floor-ans-pho l"><img src="images/default.png"/></div>
-                                            <div class="floor-ans-con l">
-                                                <span class="name">张无忌</span>：顶顶顶！
-                                                <span class="ans-time">2017-05-24 10:11:00</span>
-                                            </div>
-                                        </li>
-
-
+                                        <c:forEach items="${list.replies}" var="reply">
+                                            <!-- 回复部分,楼中楼 -->
+                                            <li class="clearfix">
+                                                <div class="floor-ans-pho l"><img src="images/default.png"/></div>
+                                                <div class="floor-ans-con l">
+                                                    <span class="name">${reply.replyUserName}</span>：${reply.replyContent}
+                                                    <span class="ans-time">${reply.replyTime}</span>
+                                                </div>
+                                            </li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                                 <span class="icon-feedback">
-                                <a href="javascript:;" onclick="showDialog(1)"> <i></i> 回复</a>
+                                <a href="javascript:;" onclick="showDialog(${lou.index+1},${list.commentId})"> <i></i> 回复</a>
                             </span>
                             </div>
                         </div>
@@ -165,6 +164,7 @@
 <form action="${pageContext.request.contextPath}/article/reply.do?" method="post">
     <input type="hidden" value="${article.articleId}" name="articleId">
     <input type="hidden" value="${user.userName}" name="replyUserName">
+    <input type="hidden" id="commentId" name="commentId"/>
     <div class="pop-box ft-box">
         <div class="mask"></div>
         <div class="win">
@@ -180,7 +180,7 @@
             <div class="win_ft">
                 <div class="win_ft_in">
                     <input type="submit" class="btn" value="回复"/>
-					<input type="hidden" id="commentId" name="commentId"/>
+
                 </div>
             </div>
         </div>
@@ -199,7 +199,7 @@
 
 <script type="text/javascript">
 //弹出回复框
-function showDialog(num, commentId) {
+function showDialog(num,commentId) {
 	var loginUser = "${user}";
 	if(!loginUser){
 		alert("请登录");

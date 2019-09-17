@@ -19,4 +19,6 @@ public interface ArticleService {
     void createNewArticle(Article article);
 
     Article findArticleByArticleId(int id);
+
+    List<Reply> findReplyByCommentId(Integer commentId);
 }

@@ -58,4 +58,15 @@ public class Reply {
     public void setCommentId(Integer commentId) {
         this.commentId = commentId;
     }
+
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "replyId=" + replyId +
+                ", replyContent='" + replyContent + '\'' +
+                ", replyTime=" + replyTime +
+                ", replyUserName='" + replyUserName + '\'' +
+                ", commentId=" + commentId +
+                '}';
+    }
 }

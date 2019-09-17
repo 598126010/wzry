@@ -68,4 +68,16 @@ public class Report {
     public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "reportId=" + reportId +
+                ", reportContent='" + reportContent + '\'' +
+                ", reportTime=" + reportTime +
+                ", reportUserName='" + reportUserName + '\'' +
+                ", reportStatus=" + reportStatus +
+                ", articleId=" + articleId +
+                '}';
+    }
 }

@@ -8,7 +8,6 @@ import com.bbs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service("articleService")
@@ -17,6 +16,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao;
     @Override
     public void saveReply(Reply reply) {
+        System.out.println(reply);
         articleDao.saveReply(reply);
     }
 
@@ -64,8 +64,15 @@ public class ArticleServiceImpl implements ArticleService {
         return  articleDao.findArticleByArticleId(id);
     }
 
-    public static void main(String[] args) {
-        Date date= new Date();
-        System.out.println(date);
+    /**
+     * 根据commentId获取reply集合
+     * @param commentId
+     * @return
+     */
+    @Override
+    public List<Reply> findReplyByCommentId(Integer commentId) {
+        return articleDao.findReplyByCommentId(commentId);
+
     }
+
 }

@@ -1,6 +1,8 @@
 package com.bbs.controller;
 
 
+import com.bbs.common.CommonCode;
+import com.bbs.common.ResponseResult;
 import com.bbs.domain.UserInfo;
 
 import com.bbs.service.UserService;
@@ -196,5 +198,33 @@ public class UserController {
         }
     }
 
+    //跳转到申请高级用户
+    @RequestMapping("/findUserApply.do")
+    public String findUserApply(){
+        return "userApply";
+    }
 
+    //申请高级用户
+    @RequestMapping("/apply")
+    @ResponseBody
+    public ResponseResult apply(HttpServletRequest request){
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+        try {
+            userService.apply(user);
+            return new ResponseResult(CommonCode.SUCCESS);
+        }catch (Exception e){
+            return new ResponseResult(CommonCode.FAIL);
+        }
+
+    }
+
+    //统计用户发帖数
+    @RequestMapping("/getCount")
+    @ResponseBody
+    public Integer getCount(HttpServletRequest request){
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+
+        Integer count = userService.getCount(user.getUserName());
+        return count;
+    }
 }

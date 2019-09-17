@@ -25,4 +25,6 @@ public interface ArticleDao {
     Article findArticleByArticleId(int id);
     @Select("select * from bbs_reply_table where commentId = #{commentId}")
     List<Reply> findReplyByCommentId(Integer commentId);
+
+
 }

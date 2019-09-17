@@ -47,4 +47,12 @@ public interface UserDao {
     //修改密码
     @Update("update bbs_user_table set userPass = #{userPass} where userId = #{userId}")
     void changeUserPass(UserInfo user);
+
+    //申请高级用户
+    @Update("update bbs_user_table set isupdating = 1 where userId = #{userId}")
+    void updateByPrimaryKey(UserInfo user);
+
+    //统计用户发帖数
+    @Select("select count(*) from bbs_article_table where senderName = #{userName};")
+    Integer getCount(String userName);
 }

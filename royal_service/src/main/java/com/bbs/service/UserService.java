@@ -27,4 +27,10 @@ public interface UserService {
 
     //修改密码
     void changeUserPass(String userId, String newPass);
+
+    //申请高级用户
+    void apply(UserInfo user);
+
+    //统计用户发帖数
+    Integer getCount(String userName);
 }

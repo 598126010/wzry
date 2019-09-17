@@ -120,4 +120,17 @@ public class UserServiceImpl implements UserService {
         user.setUserPass(newPass);
         userDao.changeUserPass(user);
     }
+
+    //申请高级用户
+    @Override
+    public void apply(UserInfo user) {
+        userDao.updateByPrimaryKey(user);
+
+    }
+
+    //统计用户发帖数
+    @Override
+    public Integer getCount(String userName) {
+        return userDao.getCount(userName);
+    }
 }

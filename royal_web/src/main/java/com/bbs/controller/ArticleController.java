@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -22,9 +24,9 @@ public class ArticleController {
     帖子回复功能
      */
     @RequestMapping("reply")
-    public String reply(Reply reply){
+    public String reply(Reply reply,int articleId){
         articleService.saveReply(reply);
-        return "getAritcle";
+        return "redirect:getArticle.do?articleId="+articleId;
     }
 
     /**
@@ -35,7 +37,7 @@ public class ArticleController {
     @RequestMapping("/comment")
     public String comment(Comment comment){
         articleService.saveComment(comment);
-        return "getAritcle";
+        return "redirect:getArticle.do?articleId="+comment.getArticleId();
     }
     /**
      * 展示不同讨论区的帖子信息
@@ -52,14 +54,21 @@ public class ArticleController {
     /**
      * 点击帖子,浏览帖子详情
      */
-    @RequestMapping("getArticle")
+    @RequestMapping("/getArticle")
     public ModelAndView getArticle(ModelAndView mv,@RequestParam(name = "articleId",required = true) int id){
         Article article = articleService.findArticleByArticleId(id);
         //根据articleId获取comment集合
         List<Comment> commentList = articleService.getArticleByArticleId(id);
+        HashMap map = new HashMap<>();
+        for (Comment comment : commentList) {
+            Integer commentId = comment.getCommentId();
+            ArrayList<Reply> replyList=replyService.findReplyByCommentId(commentId);
+            map.put(commentId,replyList);
+        }
         //将article对象传入request域中
         mv.addObject("article",article);
         mv.addObject("commentList",commentList);
+        mv.addObject("replyList",map);
         mv.setViewName("getArticle");
         return mv;
     }

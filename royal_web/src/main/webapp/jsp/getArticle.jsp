@@ -55,7 +55,7 @@
 
         <!--导航，回首页，帖子标题，排序-->
         <div class="detail-page-box clearfix">
-            <a href="index.do">
+            <a href="${pageContext.request.contextPath}/index.jsp">
                 <i class="hm-ico-home"></i>首页
             </a>
             <span>></span>
@@ -138,10 +138,10 @@
 
             <!-- 登录后显示评论输入框-->
             <form action="${pageContext.request.contextPath}/article/comment.do" method="post">
+                <input type="hidden" value="${article.articleId}" name="articleId">
                 <div class="con con-loged">
                     <div class="con-t">
-                        <input type="hidden" name="commentUserName" value="xxx">
-                        <input type="hidden" name="articleId" value="111">
+                        <input type="hidden" name="commentUserName" value="${user.userName}">
                         <textarea id="content" name="commentContent" placeholder="请在此输入您要回复的信息"></textarea>
                     </div>
                     <div class="con-b">
@@ -162,7 +162,9 @@
 
 
 <!-- 回复弹出框 -->
-<form action="${pageContext.request.contextPath}/article/reply.do?replyUserName=xxx&commentId=xxx" method="post">
+<form action="${pageContext.request.contextPath}/article/reply.do?" method="post">
+    <input type="hidden" value="${article.articleId}" name="articleId">
+    <input type="hidden" value="${user.userName}" name="replyUserName">
     <div class="pop-box ft-box">
         <div class="mask"></div>
         <div class="win">
@@ -198,7 +200,7 @@
 <script type="text/javascript">
 //弹出回复框
 function showDialog(num, commentId) {
-	var loginUser = "${loginUser}";
+	var loginUser = "${user}";
 	if(!loginUser){
 		alert("请登录");
 		return;

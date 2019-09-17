@@ -96,6 +96,7 @@ public class UserController {
         }
 
         String path = request.getSession().getServletContext().getRealPath("/uploads/");
+        System.out.println(path);
         File file = new File(path);
         if(!file.exists()){
             file.mkdirs();

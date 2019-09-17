@@ -17,4 +17,26 @@ public interface UserDao {
 
     @Update("update bbs_user_table set loginStatus = #{loginStatus} where userId = #{userId}")
     void updateLoginStatus(Map map);
+
+    //更新用户信息
+    @Update("update bbs_user_table set email = #{email} where userId = #{userId}")
+    void updateUserEmail(UserInfo userInfo);
+
+    @Select("select * from bbs_user_table where userId= #{userId}")
+    UserInfo findUserInfo(UserInfo user);
+
+    @Update("update bbs_user_table set picUrl = #{picUrl} where userId = #{userId}")
+    void updateUserPicture(UserInfo user);
+
+    //查找用户头像
+    @Select("select * from bbs_user_table where userId = #{userId}")
+    UserInfo findUserPicture(UserInfo userInfo);
+
+    //邮箱校验
+    @Select("select * from bbs_user_table where email = #{email};")
+    UserInfo checkUserEmail(String email);
+
+    //展示用户信息
+    @Select("select * from bbs_user_table where userId = #{userId}")
+    UserInfo findById(Integer userId);
 }

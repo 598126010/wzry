@@ -5,7 +5,7 @@ package com.bbs.domain;
  *   `zoneName` varchar(32) DEFAULT NULL COMMENT '新增板块名字',
  *   `userName` varchar(32) DEFAULT NULL COMMENT '用户名',
  *   `reason` varchar(255) DEFAULT NULL COMMENT '申请原因',
- *   `status` int(2) DEFAULT '0' COMMENT '处理状态(未处理-0,已处理-1)',
+ *   `status` int(2) DEFAULT '0' COMMENT '处理状态(未处理-0,已处理-1)'
  */
 public class ZoneApply {
 

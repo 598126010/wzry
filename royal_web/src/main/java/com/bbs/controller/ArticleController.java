@@ -62,8 +62,6 @@ public class ArticleController {
         HashMap map = new HashMap<>();
         for (Comment comment : commentList) {
             Integer commentId = comment.getCommentId();
-            ArrayList<Reply> replyList=replyService.findReplyByCommentId(commentId);
-            map.put(commentId,replyList);
         }
         //将article对象传入request域中
         mv.addObject("article",article);

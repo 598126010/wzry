@@ -45,7 +45,7 @@ public class UserInfo {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getUserPass() {
@@ -53,7 +53,7 @@ public class UserInfo {
     }
 
     public void setUserPass(String userPass) {
-        this.userPass = userPass;
+        this.userPass = userPass == null ? null : userPass.trim();
     }
 
     public String getEmail() {
@@ -69,7 +69,7 @@ public class UserInfo {
     }
 
     public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
+        this.picUrl = picUrl == null ? null : userPass.trim();;
     }
 
     public Integer getRole() {

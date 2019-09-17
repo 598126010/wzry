@@ -21,6 +21,9 @@ public interface UserService {
 
     //展示用户信息
     UserInfo findById(Integer userId);
+    boolean checkOutUsername(String username);
+    //添加用户
+    boolean saveUser(UserInfo userInfo);
 
     //查询旧密码
     Boolean checkUserPass(String userId, String oldPass);

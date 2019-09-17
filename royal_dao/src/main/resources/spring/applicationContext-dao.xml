@@ -29,7 +29,7 @@
                 <bean class="com.github.pagehelper.PageInterceptor">
                     <property name="properties"> <!--使用下面的方式配置参数，一行配置一个 -->
                         <props>
-                            <prop key="helperDialect">oracle</prop>
+                            <prop key="helperDialect">mysql</prop>
                             <prop key="reasonable">true</prop>
                         </props>
                     </property>

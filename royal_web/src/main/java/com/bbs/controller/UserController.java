@@ -3,6 +3,7 @@ package com.bbs.controller;
 
 import com.bbs.common.CommonCode;
 import com.bbs.common.ResponseResult;
+import com.bbs.domain.ResultInfo;
 import com.bbs.domain.UserInfo;
 
 import com.bbs.service.UserService;
@@ -96,7 +97,6 @@ public class UserController {
         }
 
         String path = request.getSession().getServletContext().getRealPath("/uploads/");
-        System.out.println(path);
         File file = new File(path);
         if(!file.exists()){
             file.mkdirs();
@@ -177,7 +177,28 @@ public class UserController {
     public String findUserPwd(){
         return "userPwd";
     }
+    @RequestMapping("/register.do")
+    public String register(UserInfo userInfo,HttpServletRequest request){
+      boolean result =   userService.saveUser(userInfo);
+      if (result){
+          request.getSession().setAttribute("user",userInfo);
+          return "redirect:/article/findArticleListByZoneId.do";
+      }
+        return null;
 
+    }
+    @RequestMapping("checkOutUsername.do")
+    @ResponseBody
+    public ResultInfo checkOutUsername( String username){
+        boolean result = userService.checkOutUsername(username);
+        String msg;
+        //存在为false,不存在为true
+        if(result){
+            return new ResultInfo(null,true);
+        }else {
+            return new ResultInfo("用户名已存在",false);
+        }
+    }
     /**
      * 修改密码
      * @param userId

@@ -1,6 +1,7 @@
 package com.bbs.dao;
 
 import com.bbs.domain.UserInfo;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -39,6 +40,11 @@ public interface UserDao {
     //展示用户信息
     @Select("select * from bbs_user_table where userId = #{userId}")
     UserInfo findById(Integer userId);
+    //校验用户名是否重复
+    @Select("select * from bbs_user_table where userName = #{username}")
+    UserInfo findUserInfoByUsername(String username);
+    @Insert("insert into bbs_user_table(userName,userPass,email) values(#{userName},#{userPass},#{email})")
+    int saveUser(UserInfo userInfo);
 
     //查询旧密码
     @Select("select * from bbs_user_table where userId = #{userId} and userPass = #{userPass}")

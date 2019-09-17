@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-
     //用户登入
     @Override
     public UserInfo login(UserInfo userInfo) {
@@ -35,8 +34,8 @@ public class UserServiceImpl implements UserService {
     public void updateLoginStatus(Integer userId, Integer loginStatus) {
 
         Map map = new HashMap<>();
-        map.put("userId",userId);
-        map.put("loginStatus",loginStatus);
+        map.put("userId", userId);
+        map.put("loginStatus", loginStatus);
         userDao.updateLoginStatus(map);
     }
 

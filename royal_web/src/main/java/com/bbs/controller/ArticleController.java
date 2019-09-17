@@ -25,7 +25,7 @@ public class ArticleController {
     /**
     帖子回复功能
      */
-    @RequestMapping("reply")
+    @RequestMapping("/reply")
     public String reply(Reply reply,int articleId){
         articleService.saveReply(reply);
         return "redirect:getArticle.do?articleId="+articleId;
@@ -44,7 +44,7 @@ public class ArticleController {
     /**
      * 展示不同讨论区的帖子信息
      */
-    @RequestMapping("findArticleListByZoneId")
+    @RequestMapping("/findArticleListByZoneId.do")
     public ModelAndView findArticleListByZoneId(ModelAndView mv, @RequestParam(name = "zoneId",required = true,defaultValue = "1")int id){
         //根据获取的交流区Id查询帖子集合
        List<Article> list =  articleService.findArticleListByZoneId(id);
@@ -75,7 +75,7 @@ public class ArticleController {
     /**
      * 创建新的帖子
      */
-    @RequestMapping("createNewArticle")
+    @RequestMapping("/createNewArticle")
     public String createNewArticle(Article article){
         //根据获取的article对象执行保存操作
         articleService.createNewArticle(article);

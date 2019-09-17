@@ -67,6 +67,6 @@ public class ArticleController {
     public String createNewArticle(Article article){
         //根据获取的article对象执行保存操作
         articleService.createNewArticle(article);
-        return "redirect:\"findArticleListByZoneId.do?\""+article.getZoneId();
+        return "redirect:findArticleListByZoneId.do?zoneId="+article.getZoneId();
     }
 }

@@ -24,6 +24,18 @@
     <!--获取SqlSessionFactory-->
     <bean id="SqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <property name="plugins" >
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties"> <!--使用下面的方式配置参数，一行配置一个 -->
+                        <props>
+                            <prop key="helperDialect">oracle</prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!--获取dao代理对象-->
     <bean id=".MapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

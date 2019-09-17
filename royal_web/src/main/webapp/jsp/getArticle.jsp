@@ -72,7 +72,7 @@
                 <!--原帖楼-->
                 <li class="floor clearfix">
                     <div class="floorer-info l">
-                        <div class="floorer-photo"><img src="images/default.png"/></div>
+                        <div class="floorer-photo"><img id="articlePic" src=""/></div>
                         <div class="floorer-name">${article.senderName}</div>
                     </div>
                     <div class="floor-con l">

@@ -17,4 +17,6 @@ public interface ArticleService {
     List<Comment> getArticleByArticleId(int id);
 
     void createNewArticle(Article article);
+
+    Article findArticleByArticleId(int id);
 }

@@ -54,6 +54,16 @@ public class ArticleServiceImpl implements ArticleService {
         articleDao.createNewArticle(article);
     }
 
+    /**
+     * 根据articleId获取
+     * @param id
+     * @return
+     */
+    @Override
+    public Article findArticleByArticleId(int id) {
+        return  articleDao.findArticleByArticleId(id);
+    }
+
     public static void main(String[] args) {
         Date date= new Date();
         System.out.println(date);

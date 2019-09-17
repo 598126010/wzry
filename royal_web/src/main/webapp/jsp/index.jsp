@@ -135,7 +135,7 @@
 
 <!-- 发帖弹出框 -->
 <form action="${pageContext.request.contextPath}/article/createNewArticle.do?" method="post">
-    <input type="hidden" value="${exitsUser.username}" name="senderName">
+    <input type="hidden" value="${user.userName}" name="senderName">
     <input type="hidden" value="${zoneId}" name="zoneId">
     <div class="pop-box ft-box">
         <div class="mask"></div>
@@ -162,7 +162,7 @@
 <script>
     $(function () {
         $("#newTopicBtn").click(function () {
-            <%--if(${existUser==null}){--%>
+            <%--if(${user==null}){--%>
                 <%--alert("请先登录用户")--%>
                 <%--return--%>
             <%--}--%>

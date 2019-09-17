@@ -54,8 +54,11 @@ public class ArticleController {
      */
     @RequestMapping("getArticle")
     public ModelAndView getArticle(ModelAndView mv,@RequestParam(name = "articleId",required = true) int id){
+        Article article = articleService.findArticleByArticleId(id);
         //根据articleId获取comment集合
         List<Comment> commentList = articleService.getArticleByArticleId(id);
+        //将article对象传入request域中
+        mv.addObject("article",article);
         mv.addObject("commentList",commentList);
         mv.setViewName("getArticle");
         return mv;

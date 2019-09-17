@@ -21,4 +21,6 @@ public interface ArticleDao {
     List<Comment> getArticleByArticleId(int id);
     @Insert("insert into bbs_article_table(title,content,senderName,zoneId) values(#{title},#{content},#{senderName},#{zoneId})")
     void createNewArticle(Article article);
+    @Select("select * from  bbs_article_table where articleId = #{id}")
+    Article findArticleByArticleId(int id);
 }

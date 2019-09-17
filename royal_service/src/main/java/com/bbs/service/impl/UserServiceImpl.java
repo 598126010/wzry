@@ -57,10 +57,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserPicture(Integer userId, String saveName) {
+    public void updateUserPicture(Integer userId, String filename) {
         UserInfo user = new UserInfo();
         user.setUserId(userId);
-        user.setPicUrl(saveName);
+        user.setPicUrl(filename);
         userDao.updateUserPicture(user);
     }
 
@@ -93,5 +93,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfo findById(Integer userId) {
         return userDao.findById(userId);
+    }
+
+    //查询旧密码
+    @Override
+    public Boolean checkUserPass(String userId, String oldPass) {
+        UserInfo u = new UserInfo();
+        u.setUserId(Integer.parseInt(userId));
+        u.setUserPass(oldPass);
+        UserInfo check = userDao.checkUserPass(u);
+        if (check != null){
+            //旧密码正确,查到用户
+            return true;
+        }else{
+            //旧密码错误,查不到用户
+            return false;
+        }
+
+    }
+
+    //修改密码
+    @Override
+    public void changeUserPass(String userId, String newPass) {
+        UserInfo user = new UserInfo();
+        user.setUserId(Integer.parseInt(userId));
+        user.setUserPass(newPass);
+        userDao.changeUserPass(user);
     }
 }

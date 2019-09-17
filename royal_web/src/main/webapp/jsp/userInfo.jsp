@@ -27,7 +27,7 @@
                     $("#userPic").attr("src","${pageContext.request.contextPath}/"+data);
                 }
             });
-
+            //用来判断邮箱是否存在的标记;
             var flag = true;
 
             $("#changeUserInfo").click(function () {
@@ -143,7 +143,7 @@
                 <form action="${pageContext.request.contextPath}/user/upload.do" method="post" id="uploadForm" enctype="multipart/form-data">
                     <ul class="bd">
                         <li class="clearfix">
-                            <input type="hidden" id="userId" name="userid" value="${sessionScope.user.userId}"/>
+                            <input type="hidden" id="userId" name="userId" value="${sessionScope.user.userId}"/>
                             <div class="info-l"><i class="red">*</i>用户名：</div>
                             <div class="info-r"><input type="text" class="txt" value="${sessionScope.user.userName}" readonly="readonly" /></div>
                         </li>

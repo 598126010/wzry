@@ -45,14 +45,15 @@
         <div class="reg-box">
             <h2>用户注册<span>（红色型号代表必填）</span></h2>
             <div class="reg-info">
-                <form action="${pageContext.request.contextPath}/article/comment.do" method="post">
+                <form action="${pageContext.request.contextPath}/article/comment.do" method="post" id="registerForm">
                     <ul>
                         <li>
                             <div class="reg-l">
                                 <span class="red">*</span> 用户名：
                             </div>
                             <div class="reg-c">
-                                <input type="text" id="userName" name="userName" class="txt" value=""/>
+                                <input id="username" name="userName" class="txt" value=""/></br>
+                                <span id="checkoutUsername"></span>
                             </div>
                             <span class="tips">用户名必须是由英文、数字、下划线组成</span>
                         </li>
@@ -61,14 +62,16 @@
                                 <span class="red">*</span> 密&nbsp;&nbsp;&nbsp;码：
                             </div>
                             <div class="reg-c">
-                                <input type="password" id="userPass" name="userPass" class="txt" value=""/>
+                                <input type="password" id="password" name="userPass" class="txt" value=""/>
+                                <span id="checkoutPasswrod"></span>
                             </div>
                             <span class="tips">密码长度必须6~10位的英文或数字</span>
                         </li>
                         <li class="no-tips">
                             <div class="reg-l">&nbsp;&nbsp;邮&nbsp;&nbsp;&nbsp;箱：</div>
                             <div class="reg-c">
-                                <input type="text" id="email" name="email" class="txt" value=""/>
+                                <input type="email" id="email" name="email" class="txt" value=""/>
+                                <span id="checkoutEmail"></span>
                             </div>
                         </li>
                         <li>
@@ -89,7 +92,36 @@
 
 <!-- 底部 -->
 <jsp:include page="common/footer.jsp"/>
-
+<script>
+   $(function () {
+       $("#username").blur(function () {
+           //用户名必须是由英文、数字、下划线组成
+           var reg = /^[0-9a-zA-Z-_]+$/;
+         var username = $("#username").val();
+          var reslut = reg.test(username);
+          if (!reslut){
+                $("#checkoutUsername").html("用户名格式不正确")
+          }
+       })
+       $("#password").blur(function () {
+          // 密码长度必须6~10位的英文或数字
+           var reg = /^[a-zA-Z0-9_]{6,10}$/;
+           var password = $("#password").val();
+           var reslut = reg.test(password);
+           if (!reslut){
+               $("#checkoutPasswrod").html("密码格式不正确")
+           }
+       })
+       $("#email").blur(function () {
+           var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+           var email = $("#email").val();
+           var reslut = reg.test(email);
+           if (!reslut){
+               $("#checkoutEmail").html("密码格式不正确")
+           }
+       })
+   })
+</script>
 
 </body>
 </html>

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -58,14 +57,14 @@ public class ArticleController {
         Article article = articleService.findArticleByArticleId(id);
         //根据articleId获取comment集合
         List<Comment> commentList = articleService.getArticleByArticleId(id);
-        HashMap map = new HashMap<>();
         for (Comment comment : commentList) {
             Integer commentId = comment.getCommentId();
+            List<Reply> replyList = articleService.findReplyByCommentId(commentId);
+            comment.setReplies(replyList);
         }
         //将article对象传入request域中
         mv.addObject("article",article);
         mv.addObject("commentList",commentList);
-        mv.addObject("replyList",map);
         mv.setViewName("getArticle");
         return mv;
     }

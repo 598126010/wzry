@@ -94,6 +94,25 @@ public class UserServiceImpl implements UserService {
         return userDao.findById(userId);
     }
 
+    @Override
+    public boolean checkOutUsername(String username) {
+      UserInfo userInfo =   userDao.findUserInfoByUsername(username);
+        if (userInfo != null){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean saveUser(UserInfo userInfo) {
+        int i = userDao.saveUser(userInfo);
+        if (i == 1){
+            return true;
+        }
+        return false;
+    }
+
     //查询旧密码
     @Override
     public Boolean checkUserPass(String userId, String oldPass) {

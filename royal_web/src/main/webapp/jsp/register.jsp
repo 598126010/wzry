@@ -146,46 +146,45 @@
 
            }
        })
-       function checkUsername(){
-           var reg = /^[0-9a-zA-Z-_]*$/;
-           var username = $("#username").val();
-          var usernameStatus =  reg.test(username);
-          alert(usernameStatus)
-          if(usernameStatus){
-              return true;
-          }else {
-              return false;
-          }
-       }
-       function checkPassword(){
-           var password = $("#password").val();
-           var reg = /^[a-zA-Z0-9_]{3,10}$/;
-           var passwordStatus =  reg.test(password);
-           if(passwordStatus){
-               return true;
-           }else {
-               return false;
-           }
-       }
-       function checkEmail(){
-           var email = $("#email").val();
-           var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-            var emailStatus = reg.test(email);
-           if(passwordStatus){
-               return true;
-           }else {
-               return false;
-           }
-       }
-
        $("#btn").click(function () {
-           if(checkEmail && checkPassword && checkUsername){
+           if(checkEmail() && checkPassword() && checkUsername()){
                $("#registerForm").submit;
            }else {
                alert("请填写正确信息再进行提交")
            }
        })
        })
+   function checkUsername(){
+       var reg = /^[0-9a-zA-Z-_]*$/;
+       var username = $("#username").val();
+       var usernameStatus =  reg.test(username);
+       alert(usernameStatus)
+       if(usernameStatus){
+           return true;
+       }else {
+           return false;
+       }
+   }
+   function checkPassword(){
+       var password = $("#password").val();
+       var reg = /^[a-zA-Z0-9_]{3,10}$/;
+       var passwordStatus =  reg.test(password);
+       if(passwordStatus){
+           return true;
+       }else {
+           return false;
+       }
+   }
+   function checkEmail(){
+       var email = $("#email").val();
+       var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+       var emailStatus = reg.test(email);
+       if(passwordStatus){
+           return true;
+       }else {
+           return false;
+       }
+   }
 </script>
 
 </body>

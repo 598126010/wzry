@@ -69,7 +69,7 @@ public class UserInfo {
     }
 
     public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl == null ? null : userPass.trim();;
+        this.picUrl = picUrl == null ? null : picUrl.trim();
     }
 
     public Integer getRole() {

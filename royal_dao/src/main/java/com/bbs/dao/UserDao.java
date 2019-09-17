@@ -39,4 +39,20 @@ public interface UserDao {
     //展示用户信息
     @Select("select * from bbs_user_table where userId = #{userId}")
     UserInfo findById(Integer userId);
+
+    //查询旧密码
+    @Select("select * from bbs_user_table where userId = #{userId} and userPass = #{userPass}")
+    UserInfo checkUserPass(UserInfo u);
+
+    //修改密码
+    @Update("update bbs_user_table set userPass = #{userPass} where userId = #{userId}")
+    void changeUserPass(UserInfo user);
+
+    //申请高级用户
+    @Update("update bbs_user_table set isupdating = 1 where userId = #{userId}")
+    void updateByPrimaryKey(UserInfo user);
+
+    //统计用户发帖数
+    @Select("select count(*) from bbs_article_table where senderName = #{userName};")
+    Integer getCount(String userName);
 }

@@ -21,4 +21,16 @@ public interface UserService {
 
     //展示用户信息
     UserInfo findById(Integer userId);
+
+    //查询旧密码
+    Boolean checkUserPass(String userId, String oldPass);
+
+    //修改密码
+    void changeUserPass(String userId, String newPass);
+
+    //申请高级用户
+    void apply(UserInfo user);
+
+    //统计用户发帖数
+    Integer getCount(String userName);
 }

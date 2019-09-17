@@ -3,13 +3,17 @@ package com.bbs.controller;
 import com.bbs.domain.Article;
 import com.bbs.domain.Comment;
 import com.bbs.domain.Reply;
+import com.bbs.domain.UserInfo;
 import com.bbs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller

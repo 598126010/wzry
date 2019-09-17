@@ -29,7 +29,7 @@
         <!--帖子标题，点赞数，回复数，搜索-->
         <div class="hm-bbs-info">
             <div class="hm-bbs-icon l" style="width:130px;">
-                <span><img src="images/bbs-icon.png" height="80"/></span>
+                <span><img src="/images/bbs-icon.png" height="80"/></span>
             </div>
             <div class="hm-bbs-info-in l" style="margin-left:30px;">
                 <div class="t clearfix">
@@ -72,7 +72,7 @@
                 <!--原帖楼-->
                 <li class="floor clearfix">
                     <div class="floorer-info l">
-                        <div class="floorer-photo"><img src="images/default.png"/></div>
+                        <div class="floorer-photo"><img id="articlePic" src=""/></div>
                         <div class="floorer-name">${article.senderName}</div>
                     </div>
                     <div class="floor-con l">

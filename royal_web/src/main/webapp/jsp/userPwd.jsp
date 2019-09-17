@@ -21,7 +21,7 @@
             $.ajax({
                 type:"POST",
                 url:"${pageContext.request.contextPath}/user/findUserPicture.do",
-                data:{"userid":${sessionScope.user.userId}},
+                data:{"userId":${sessionScope.user.userId}},
                 dataType:"text",
                 success:function (data) {
                     $("#userPic").attr("src","${pageContext.request.contextPath}/"+data);
@@ -34,7 +34,7 @@
                         $.ajax({
                             url:"${pageContext.request.contextPath}/user/userChangePass.do",
                             type:"POST",
-                            data:{"userid":${sessionScope.user.userId},"oldPass":$("#oldPassword").val(),"newPass":$("#newPassword").val()},
+                            data:{"userId":${sessionScope.user.userId},"oldPass":$("#oldPassword").val(),"newPass":$("#newPassword").val()},
                             dataType:"text",
                             success:function (data) {
                                 if(data=="error"){
@@ -127,7 +127,7 @@
             <div class="user-info-l l">
                 <div class="user-info-l-t">
                     <img src="" id="userPic"/>
-                    <div class="username">${sessionScope.user.username}</div>
+                    <div class="userName">${sessionScope.user.userName}</div>
                 </div>
                 <ul class="user-info-l-b">
                     <li><i class="info-icon"></i>我的资料</li>

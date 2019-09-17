@@ -21,4 +21,5 @@ public interface ArticleService {
     Article findArticleByArticleId(int id);
 
     List<Reply> findReplyByCommentId(Integer commentId);
+
 }

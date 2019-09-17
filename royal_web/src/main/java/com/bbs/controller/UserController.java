@@ -1,7 +1,10 @@
 package com.bbs.controller;
 
 
+import com.bbs.common.CommonCode;
+import com.bbs.common.ResponseResult;
 import com.bbs.domain.UserInfo;
+
 import com.bbs.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,12 +90,13 @@ public class UserController {
      * @throws IOException
      */
     @RequestMapping("/upload.do")
-    public String userInfoChange(Integer userId, String email, MultipartFile upload, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String userInfoChange(Integer userId,String email,MultipartFile upload,HttpServletRequest request,HttpServletResponse response) throws IOException {
         if(email != null){
             userService.updateUserEmail(userId,email);
         }
 
         String path = request.getSession().getServletContext().getRealPath("/uploads/");
+        System.out.println(path);
         File file = new File(path);
         if(!file.exists()){
             file.mkdirs();
@@ -115,13 +119,14 @@ public class UserController {
         String saveName = "uploads/"+filename;
         userService.updateUserPicture(userId,saveName);
 
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUserId(userId);
-        UserInfo u = userService.findUserInfo(userInfo);
+        UserInfo user = new UserInfo();
+        user.setUserId(userId);
+        UserInfo u = userService.findUserInfo(user);
         request.getSession().setAttribute("user",u);
 
         return "userInfo";
     }
+
 
     /**
      * 查找用户头像
@@ -162,9 +167,9 @@ public class UserController {
      */
     @RequestMapping("/findUserInfo.do")
     public String findUserInfo(HttpServletRequest request){
-        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
-        UserInfo userInfo1 = userService.findById(userInfo.getUserId());
-        request.getSession().setAttribute("user",userInfo1);
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+        UserInfo user1 = userService.findById(user.getUserId());
+        request.getSession().setAttribute("user",user1);
         return "userInfo";
     }
 
@@ -172,5 +177,63 @@ public class UserController {
     public String findUserPwd(){
         return "userPwd";
     }
+
+    /**
+     * 修改密码
+     * @param userId
+     * @param oldPass
+     * @param newPass
+     * @return
+     */
+    @RequestMapping("/userChangePass.do")
+    @ResponseBody
+    public String userChangePass(String userId,String oldPass,String newPass){
+        Boolean checkUserPass = userService.checkUserPass(userId,oldPass);
+        if(!checkUserPass){
+            //输入的旧密码错误
+            return "error";
+        }else{
+            //输入的旧密码正确
+            userService.changeUserPass(userId,newPass);
+            return "success";
+        }
+    }
+
+    //跳转到申请高级用户
+    @RequestMapping("/findUserApply.do")
+    public String findUserApply(){
+        return "userApply";
+    }
+
+    //申请高级用户
+    @RequestMapping("/apply")
+    @ResponseBody
+    public ResponseResult apply(HttpServletRequest request){
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+        try {
+            userService.apply(user);
+            return new ResponseResult(CommonCode.SUCCESS);
+        }catch (Exception e){
+            return new ResponseResult(CommonCode.FAIL);
+        }
+
+    }
+
+    //统计用户发帖数
+    @RequestMapping("/getCount")
+    @ResponseBody
+    public Integer getCount(HttpServletRequest request){
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+
+        Integer count = userService.getCount(user.getUserName());
+        return count;
+    }
+
+    //跳转到申请板块
+    @RequestMapping("/findZoneApply.do")
+    public String findZoneApply(){
+        return "zoneApply";
+    }
+
 
 }

@@ -80,7 +80,7 @@
                         <li>
                             <div class="reg-l"></div>
                             <div class="reg-c">
-                                <input type="button" class="submit-btn" id="btn" value="注册"/><br/>
+                                <input type="button" class="submit-btn" value="注册" id="zhuche" onclick="submitForm()"/><br/>
                             </div>
                         </li>
                     </ul>
@@ -146,15 +146,32 @@
 
            }
        })
-       $("#btn").click(function () {
-           if(checkEmail() && checkPassword() && checkUsername()){
-               $("#registerForm").submit;
-           }else {
+   })
+       function submitForm() {
+           alert("11")
+           var email = $("#email").val();
+           var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+           var emailStatus = reg.test(email);
+           var reg = /^[0-9a-zA-Z-_]*$/;
+           var username = $("#username").val();
+           var usernameStatus = reg.test(username);
+           var password = $("#password").val();
+           var reg = /^[a-zA-Z0-9_]{3,10}$/;
+           var passwordStatus = reg.test(password);
+           if (passwordStatus && usernameStatus && emailStatus) {
+               $("#registerForm").submit();
+           } else {
                alert("请填写正确信息再进行提交")
            }
-       })
-       })
-   function checkUsername(){
+           /* if(checkEmail() && checkPassword() && checkUsername()){
+                $("#registerForm").submit;
+            }else {
+                alert("请填写正确信息再进行提交")
+            }
+        })*/
+       }
+
+  /* function checkUsername(){
        var reg = /^[0-9a-zA-Z-_]*$/;
        var username = $("#username").val();
        var usernameStatus =  reg.test(username);
@@ -184,7 +201,7 @@
        }else {
            return false;
        }
-   }
+   }*/
 </script>
 
 </body>

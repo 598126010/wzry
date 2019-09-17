@@ -30,7 +30,7 @@
         <!--头部，帖子统计，搜索-->
         <div class="hm-bbs-info">
             <div class="hm-bbs-icon l" style="width:130px;">
-                <span><img src="images/bbs-icon.png" height="80"/></span>
+                <span><img src="/images/bbs-icon.png" height="80"/></span>
             </div>
             <div class="hm-bbs-info-in l" style="margin-left:30px;">
                 <div class="t clearfix"><h2 class="l">王者荣耀</h2></div>
@@ -53,16 +53,16 @@
         <!-- 导航 -->
         <ul class="hm-bbs-nav border-lrb clearfix">
             <li class="current">
-                <a href="#"><em></em>综合交流区</a>
+                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=1"><em></em>综合交流区</a>
             </li>
             <li>
-                <a href="#"><em></em>BUG反馈区</a>
+                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=2"><em></em>BUG反馈区</a>
             </li>
             <li>
-                <a href="#"><em></em>新闻公告区</a>
+                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=3"><em></em>新闻公告区</a>
             </li>
             <li>
-                <a href="#"><em></em>活动专区</a>
+                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=4"><em></em>活动专区</a>
             </li>
         </ul>
 
@@ -74,87 +74,22 @@
             <!-- 左侧列表 -->
             <div class="list-view l">
                 <ul>
-
-
-                    <li class="clearfix ding">
-                        <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.do">求官方出艾琳英雄活动</a>
-                        </div>
-                        <div class="hm-index-con">本人玩得迟，所以看到别人用艾琳的时候，特别羡慕，现贵族6了，很想要一个艾琳，我身边很多朋友也想要，求</div>
-                        <div class="hm-index-info l">
-                            <span class="article-username">晨曦初露</span>
-                            <span class="post-time">2017-05-24 08:00:05</span>
-                        </div>
-                        <div class="hm-index-fun r">
-                            <span class="icon-like"><i></i>1</span>
-                            <span class="icon-talk"><i></i>0</span>
-                        </div>
-                    </li>
-
-
-
-                    <li class="clearfix ding">
-                        <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.do">求官方出艾琳英雄活动</a>
-                        </div>
-                        <div class="hm-index-con">本人玩得迟，所以看到别人用艾琳的时候，特别羡慕，现贵族6了，很想要一个艾琳，我身边很多朋友也想要，求</div>
-                        <div class="hm-index-info l">
-                            <span class="article-username">晨曦初露</span><span class="post-time">2017-05-24 08:00:05</span>
-                        </div>
-                        <div class="hm-index-fun r">
-                            <span class="icon-like"><i></i>1</span>
-                            <span class="icon-talk"><i></i>0</span>
-                        </div>
-                    </li>
-                    <li class="clearfix ding">
-                        <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.do">求官方出艾琳英雄活动</a>
-                        </div>
-                        <div class="hm-index-con">本人玩得迟，所以看到别人用艾琳的时候，特别羡慕，现贵族6了，很想要一个艾琳，我身边很多朋友也想要，求</div>
-                        <div class="hm-index-info l">
-                            <span class="article-username">晨曦初露</span><span class="post-time">2017-05-24 08:00:05</span>
-                        </div>
-                        <div class="hm-index-fun r">
-                            <span class="icon-like"><i></i>1</span>
-                            <span class="icon-talk"><i></i>0</span>
-                        </div>
-                    </li>
-
-
-
-
-                    <li class="clearfix">
-                        <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.do">排位赛BUG，排不上！</a>
-                        </div>
-                        <div class="hm-index-con">现在黄金2，无论怎么匹配，都匹配不到？有次匹配了10分钟，这是为什么？</div>
-                        <div class="hm-index-info l">
-                            <span class="article-username">不哭不闹不炫耀</span><span class="post-time">2017-05-24 09:10:00</span>
-                        </div>
-                        <div class="hm-index-fun r">
-                            <span class="icon-like"><i></i>3</span>
-                            <span class="icon-talk"><i></i>10</span>
-                        </div>
-                    </li>
-
-
-
-
-                    <li class="clearfix">
-                        <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.do">排位赛BUG，排不上！</a>
-                        </div>
-                        <div class="hm-index-con">现在黄金2，无论怎么匹配，都匹配不到？有次匹配了10分钟，这是为什么？</div>
-                        <div class="hm-index-info l">
-                            <span class="article-username">不哭不闹不炫耀</span><span class="post-time">2017-05-24 09:10:00</span>
-                        </div>
-                        <div class="hm-index-fun r">
-                            <span class="icon-like"><i></i>3</span>
-                            <span class="icon-talk"><i></i>10</span>
-                        </div>
-                    </li>
-
-
+                    <c:forEach items="${articleList}" var="list">
+                        <li class="clearfix ding">
+                            <div class="hm-index-title">
+                                <i class="set-to-top">顶</i> <a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>
+                            </div>
+                            <div class="hm-index-con">${list.content}</div>
+                            <div class="hm-index-info l">
+                                <span class="article-username">${list.senderName}</span>
+                                <span class="post-time">${list.sendTime}</span>
+                            </div>
+                            <div class="hm-index-fun r">
+                                <span class="icon-like"><i></i>${list.upvoteCount}</span>
+                                <span class="icon-talk"><i></i>${list.replyCount}</span>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
 
@@ -169,11 +104,11 @@
                     </h3>
                     <ul class="b clearfix">
                         <li>
-                            <div><img src="images/default.png" height="55"/> </div>
+                            <div><img src="/images/default.png" height="55"/> </div>
                             <p>Mr.King</p>
                         </li>
                         <li>
-                            <div><img src="images/default.png" height="55"/></div>
+                            <div><img src="/images/default.png" height="55"/></div>
                             <p>疯子</p>
                         </li>
                     </ul>
@@ -199,7 +134,9 @@
 </div>
 
 <!-- 发帖弹出框 -->
-<form action="" method="post">
+<form action="${pageContext.request.contextPath}/article/createNewArticle.do?" method="post">
+    <input type="hidden" value="${exitsUser.username}" name="senderName">
+    <input type="hidden" value="${zoneId}" name="zoneId">
     <div class="pop-box ft-box">
         <div class="mask"></div>
         <div class="win">
@@ -222,7 +159,16 @@
         </div>
     </div>
 </form>
-
-
+<script>
+    $(function () {
+        $("#newTopicBtn").click(function () {
+            <%--if(${existUser==null}){--%>
+                <%--alert("请先登录用户")--%>
+                <%--return--%>
+            <%--}--%>
+            $('.ft-box').fadeIn(120);
+        })
+    })
+</script>
 </body>
 </html>

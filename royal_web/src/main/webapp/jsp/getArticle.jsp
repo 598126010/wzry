@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -92,118 +92,44 @@
 
 
                 <!-- 评论部分,一楼及以后 -->
-                <li class="floor clearfix">
-                    <div class="floorer-info l">
-                        <div class="floorer-photo"><img src="images/default.png"/></div>
-                        <div class="floorer-name">不哭不闹不炫耀</div>
-                    </div>
-                    <div class="floor-con l">
-                        <div class="floor-info clearfix">
-                            <div class="floor-time l">回贴时间：2017-05-24 10:10:00</div>
-                            <div class="r">1楼</div>
+                <c:forEach items="${commentList}" var="list" varStatus="i">
+                    <li class="floor clearfix">
+                        <div class="floorer-info l">
+                            <div class="floorer-photo"><img src="images/default.png"/></div>
+                            <div class="floorer-name">${list.commentUserName}</div>
                         </div>
-                        <div class="floor-art-ans">
-                            <div class="floor-art">
-                                <p>楼主你好，请按以下建议反馈格式回复，我们会有专人进行收集。祝你游戏愉快。</p>
+                        <div class="floor-con l">
+                            <div class="floor-info clearfix">
+                                <div class="floor-time l">回贴时间：${list.commentTime}</div>
+                                <div class="r">${i}楼</div>
                             </div>
-                            <div class="floor-ans">
-                                <ul>
+                            <div class="floor-art-ans">
+                                <div class="floor-art">
+                                    <p>${list.commentContent}</p>
+                                </div>
+                                <div class="floor-ans">
+                                    <ul>
 
-                                    <!-- 回复部分,楼中楼 -->
-                                    <li class="clearfix">
-                                        <div class="floor-ans-pho l"><img src="images/default.png"/></div>
-                                        <div class="floor-ans-con l">
-                                            <span class="name">张无忌</span>：顶顶顶！
-                                            <span class="ans-time">2017-05-24 10:11:00</span>
-                                        </div>
-                                    </li>
+                                        <!-- 回复部分,楼中楼 -->
+                                        <li class="clearfix">
+                                            <div class="floor-ans-pho l"><img src="images/default.png"/></div>
+                                            <div class="floor-ans-con l">
+                                                <span class="name">张无忌</span>：顶顶顶！
+                                                <span class="ans-time">2017-05-24 10:11:00</span>
+                                            </div>
+                                        </li>
 
 
-                                </ul>
-                            </div>
-                            <span class="icon-feedback">
+                                    </ul>
+                                </div>
+                                <span class="icon-feedback">
                                 <a href="javascript:;" onclick="showDialog(1)"> <i></i> 回复</a>
                             </span>
-                        </div>
-                    </div>
-                </li>
-
-                <!--二楼-->
-                <li class="floor clearfix">
-                    <div class="floorer-info l">
-                        <div class="floorer-photo"><img src="images/default.png"/> </div>
-                        <div class="floorer-name">不哭不闹不炫耀</div>
-                    </div>
-                    <div class="floor-con l">
-                        <div class="floor-info clearfix">
-                            <div class="floor-time l">回贴时间：2017-05-24 10:10:00</div>
-                            <div class="r">2楼</div>
-                        </div>
-                        <div class="floor-art-ans">
-                            <div class="floor-art">
-                                <p>楼主你好，请按以下建议反馈格式回复，我们会有专人进行收集。祝你游戏愉快。</p>
                             </div>
-                            <div class="floor-ans">
-                                <ul>
-
-                                    <!-- 回复部分 -->
-                                    <li class="clearfix">
-                                        <div class="floor-ans-pho l"><img src="images/default.png"/></div>
-                                        <div class="floor-ans-con l">
-                                            <span class="name">张无忌</span>：顶顶顶！
-                                            <span class="ans-time">2017-05-24 10:11:00</span>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <span class="icon-feedback">
-                                <a href="javascript:;" onclick="showDialog(2)"> <i></i> 回复</a>
-                            </span>
                         </div>
-                    </div>
-                </li>
-
-
-                <!--三楼-->
-                <li class="floor clearfix">
-                    <div class="floorer-info l">
-                        <div class="floorer-photo"><img src="images/default.png"/></div>
-                        <div class="floorer-name">不哭不闹不炫耀</div>
-                    </div>
-                    <div class="floor-con l">
-                        <div class="floor-info clearfix">
-                            <div class="floor-time l">回贴时间：2017-05-24 10:10:00</div>
-                            <div class="r">3楼</div>
-                        </div>
-                        <div class="floor-art-ans">
-                            <div class="floor-art">
-                                <p>楼主你好，请按以下建议反馈格式回复，我们会有专人进行收集。祝你游戏愉快。</p>
-                            </div>
-                            <div class="floor-ans">
-                                <ul>
-
-                                    <!-- 回复部分 -->
-                                    <li class="clearfix">
-                                        <div class="floor-ans-pho l"><img src="images/default.png"/></div>
-                                        <div class="floor-ans-con l">
-                                            <span class="name">张无忌</span>：顶顶顶！
-                                            <span class="ans-time">2017-05-24 10:11:00</span>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <span class="icon-feedback">
-                                <a href="javascript:;" onclick="showDialog(3)"> <i></i> 回复</a>
-                            </span>
-                        </div>
-                    </div>
-                </li>
-
-
-            </ul>
-        </div>
+                    </li>
+                </c:forEach>
+                
 
         <!--发表评论-->
         <div class="detail-to-comment">
@@ -211,9 +137,11 @@
             <!-- 未登录时候显示 <div class="con">您没有登录论坛，请登录后再进行回复</div>-->
 
             <!-- 登录后显示评论输入框-->
-            <form action="${pageContext.request.contextPath}/article/reply?replyContent=xxx&replyUserName=xxx&" method="post">
+            <form action="${pageContext.request.contextPath}/article/comment.do" method="post">
                 <div class="con con-loged">
                     <div class="con-t">
+                        <input type="hidden" name="commentUserName" value="xxx">
+                        <input type="hidden" name="articleId" value="111">
                         <textarea id="content" name="commentContent" placeholder="请在此输入您要回复的信息"></textarea>
                     </div>
                     <div class="con-b">
@@ -234,7 +162,7 @@
 
 
 <!-- 回复弹出框 -->
-<form action="${pageContext.request.contextPath}/" method="post">
+<form action="${pageContext.request.contextPath}/article/reply.do?replyUserName=xxx&commentId=xxx" method="post">
     <div class="pop-box ft-box">
         <div class="mask"></div>
         <div class="win">

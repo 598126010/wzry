@@ -16,7 +16,7 @@
                 <a href="register.do">【新用户注册】</a>
                 <div id="dialogBg"></div>
                 <div id="dialog" class="animated">
-                    <img class="dialogIco" width="50" height="40" src="images/ico.png"/>
+                    <img class="dialogIco" width="50" height="40" src="/images/bbs-icon.png"/>
                     <div class="dialogTop" style="height:25px;">
                         <a href="javascript:;" class="closeDialogBtn">关闭</a>
                     </div>
@@ -33,6 +33,7 @@
     </div>
 </div>
 </body>
+<script src="../js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
   $(function () {
       //显示弹框
@@ -53,4 +54,5 @@
       });
   });
 </script>
+
 </html>

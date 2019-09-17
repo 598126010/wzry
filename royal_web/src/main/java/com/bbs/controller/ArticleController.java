@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,9 +46,15 @@ public class ArticleController {
     public ModelAndView findArticleListByZoneId(ModelAndView mv, @RequestParam(name = "zoneId",required = true,defaultValue = "1")int id){
         //根据获取的交流区Id查询帖子集合
        List<Article> list =  articleService.findArticleListByZoneId(id);
+
+       //显示在线用户
+       List<UserInfo> onlineUsers = articleService.findOnlineUser();
+
+       mv.addObject("onlineUser",onlineUsers);
+
        mv.addObject("articleList",list);
        mv.addObject("zoneId",id);
-       mv.setViewName("index");
+       mv.setViewName("/index");
        return mv;
     }
     /**

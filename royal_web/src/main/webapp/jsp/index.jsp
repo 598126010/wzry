@@ -40,9 +40,9 @@
                 </p>
             </div>
             <div class="search-box l">
-                <form action="javascript:;">
-                    <input type="text" class="txt l" placeholder="请输入关键字">
-                    <input type="button" value="搜索" class="btn l"/>
+                <form action="${pageContext.request.contextPath}/articleSearch/search.do" method="get">
+                    <input type="text" name="title" class="txt l" placeholder="请输入关键字">
+                    <input type="submit" value="搜索" class="btn l"/>
                 </form>
             </div>
         </div>
@@ -100,17 +100,15 @@
             <div class="aside l">
                 <div class="aside-box">
                     <h3 class="t">
-                        <a href="javascript:;">在线用户(2)</a>
+                        <a href="javascript:;">在线用户(${onlineUser.size()})</a>
                     </h3>
                     <ul class="b clearfix">
-                        <li>
-                            <div><img src="/images/default.png" height="55"/> </div>
-                            <p>Mr.King</p>
-                        </li>
-                        <li>
-                            <div><img src="/images/default.png" height="55"/></div>
-                            <p>疯子</p>
-                        </li>
+                        <c:forEach items="${onlineUser}" var="onlineUser">
+                            <li>
+                                <div><img src="${onlineUser.picUrl}" height="55"/> </div>
+                                <p>${onlineUser.userName}</p>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

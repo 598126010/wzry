@@ -4,6 +4,7 @@ import com.bbs.dao.ArticleDao;
 import com.bbs.domain.Article;
 import com.bbs.domain.Comment;
 import com.bbs.domain.Reply;
+import com.bbs.domain.UserInfo;
 import com.bbs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,5 +75,12 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.findReplyByCommentId(commentId);
 
     }
+
+    //显示在线用户
+    @Override
+    public List<UserInfo> findOnlineUser() {
+        return articleDao.findOnlineUser();
+    }
+
 
 }

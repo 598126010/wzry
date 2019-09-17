@@ -3,6 +3,7 @@ package com.bbs.dao;
 import com.bbs.domain.Article;
 import com.bbs.domain.Comment;
 import com.bbs.domain.Reply;
+import com.bbs.domain.UserInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,7 @@ public interface ArticleDao {
     @Select("select * from bbs_reply_table where commentId = #{commentId}")
     List<Reply> findReplyByCommentId(Integer commentId);
 
-
+    //显示在线用户
+    @Select("select * from bbs_user_table where loginStatus = 1")
+    List<UserInfo> findOnlineUser();
 }

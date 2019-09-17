@@ -3,6 +3,7 @@ package com.bbs.service;
 import com.bbs.domain.Article;
 import com.bbs.domain.Comment;
 import com.bbs.domain.Reply;
+import com.bbs.domain.UserInfo;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface ArticleService {
 
     List<Reply> findReplyByCommentId(Integer commentId);
 
+    List<UserInfo> findOnlineUser();
 }

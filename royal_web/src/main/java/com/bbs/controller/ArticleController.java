@@ -1,18 +1,12 @@
-package com.bbs.manage.controller;
+package com.bbs.controller;
 
-import com.bbs.domain.Article;
-import com.bbs.domain.Comment;
-import com.bbs.domain.Reply;
-import com.bbs.domain.UserInfo;
+import com.bbs.domain.*;
 import com.bbs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -64,12 +58,14 @@ public class ArticleController {
     @RequestMapping("/getArticle")
     public ModelAndView getArticle(ModelAndView mv,@RequestParam(name = "articleId",required = true) int id){
         Article article = articleService.findArticleByArticleId(id);
+        System.out.println(article.getUserInfo());
         //根据articleId获取comment集合
         List<Comment> commentList = articleService.getArticleByArticleId(id);
         for (Comment comment : commentList) {
             Integer commentId = comment.getCommentId();
             List<Reply> replyList = articleService.findReplyByCommentId(commentId);
             comment.setReplies(replyList);
+            System.out.println(comment.getUserInfo());
         }
         //将article对象传入request域中
         mv.addObject("article",article);
@@ -102,6 +98,17 @@ public class ArticleController {
     public Integer getTotalCount(){
         Integer totalCount = articleService.getTotalCount();
         return totalCount;
+    }
+    //获取举报
+    @RequestMapping("/report")
+    @ResponseBody
+    public ResultInfo report(@RequestBody Report report){
+        System.out.println(report);
+        report.setReportStatus(1);
+        boolean result = articleService.submitReport(report);
+//        mv.setViewName("redirect:getArticle.do?articleId="+report.getArticleId());
+        return new ResultInfo("",result);
+//        return "redirect:getArticle.do?articleId="+report.getArticleId();
     }
 
 }

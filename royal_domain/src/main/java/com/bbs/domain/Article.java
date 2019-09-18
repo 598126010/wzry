@@ -1,7 +1,5 @@
 package com.bbs.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 /**
@@ -22,10 +20,30 @@ public class Article {
     private Integer articleId;//帖子编号
     private String title;//标题
     private String content;//内容
+    private UserInfo userInfo;//发帖人
 
     private Date sendTime;//发送时间
     private String senderName;//发送人编号
     private Integer isTop;//是否置顶，如果是0，代表不置顶；如果是1，代表置顶
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId=" + articleId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userInfo=" + userInfo +
+                ", sendTime=" + sendTime +
+                ", senderName='" + senderName + '\'' +
+                ", isTop=" + isTop +
+                ", replyCount=" + replyCount +
+                ", upvoteCount=" + upvoteCount +
+                ", browseCount=" + browseCount +
+                ", zoneId=" + zoneId +
+                ", isReport=" + isReport +
+                ", zone=" + zone +
+                '}';
+    }
 
     private Integer replyCount;//评论数
     private Integer upvoteCount;//点赞数
@@ -35,6 +53,14 @@ public class Article {
     private Integer isReport;
 
     private Zone zone;
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public Integer getArticleId() {
         return articleId;
@@ -131,4 +157,5 @@ public class Article {
     public void setZone(Zone zone) {
         this.zone = zone;
     }
+
 }

@@ -165,6 +165,9 @@ public class UserController {
     @RequestMapping("/findUserInfo.do")
     public String findUserInfo(HttpServletRequest request){
         UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/index.jsp";
+        }
         UserInfo user1 = userService.findById(user.getUserId());
         request.getSession().setAttribute("user",user1);
         return "userInfo";

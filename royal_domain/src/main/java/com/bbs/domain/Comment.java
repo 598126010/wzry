@@ -21,6 +21,29 @@ public class Comment {
     private String commentUserName;//评论人
     private Integer commentStatus;//评论状态，1代表屏蔽，0代表解除
     private Integer articleId;//帖子编号
+    private UserInfo userInfo;//评论人
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", commentContent='" + commentContent + '\'' +
+                ", commentTime=" + commentTime +
+                ", replies=" + replies +
+                ", commentUserName='" + commentUserName + '\'' +
+                ", commentStatus=" + commentStatus +
+                ", articleId=" + articleId +
+                ", userInfo=" + userInfo +
+                '}';
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public Integer getCommentId() {
         return commentId;
@@ -78,16 +101,4 @@ public class Comment {
         this.replies = replies;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "commentId=" + commentId +
-                ", commentContent='" + commentContent + '\'' +
-                ", commentTime=" + commentTime +
-                ", replies=" + replies +
-                ", commentUserName='" + commentUserName + '\'' +
-                ", commentStatus=" + commentStatus +
-                ", articleId=" + articleId +
-                '}';
-    }
 }

@@ -3,6 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .floor-con .icon-report a{
+            background-position: -64px -16px;
+        }
+
+        .floor-con .icon-feedback1 a{
+            background-position: -112px -32px;
+        }
+
+        .floor-con .icon-comment,.floor-con .icon-feedback ,.floor-con .icon-report ,.floor-con .icon-feedback1{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+    </style>
     <meta charset="UTF-8"/>
     <title>黑马程序员论坛详情页</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css"/>
@@ -41,6 +56,7 @@
                         <span class="icon-talk">
 						     <i></i>10
 						</span>
+
                     </div>
                 </div>
             </div>
@@ -72,7 +88,7 @@
                 <!--原帖楼-->
                 <li class="floor clearfix">
                     <div class="floorer-info l">
-                        <div class="floorer-photo"><img id="articlePic" src=""/></div>
+                        <div class="floorer-photo"><img id="articlePic" src="/${article.userInfo.picUrl}"/></div>
                         <div class="floorer-name">${article.senderName}</div>
                     </div>
                     <div class="floor-con l">
@@ -85,8 +101,10 @@
                                 <p>${article.content}</p>
                             </div>
                             <div class="floor-ans"></div>
+
                         </div>
-                        <span class="icon-comment"><a href="#comment"> <i></i> 评论</a></span>
+                        <span  style="right: 100px"><a href="#" id="report" articleId = "${article.articleId}"><i></i>举报</a></span>
+                        <span class="icon-comment" style="right: 50px"><a href="#comment"> <i></i> 评论</a></span>
                     </div>
                 </li>
 
@@ -95,7 +113,7 @@
                 <c:forEach items="${commentList}" var="list" varStatus="lou">
                     <li class="floor clearfix">
                         <div class="floorer-info l">
-                            <div class="floorer-photo"><img src="images/default.png"/></div>
+                            <div class="floorer-photo"><img src="/${list.userInfo.picUrl}"/></div>
                             <div class="floorer-name">${list.commentUserName}</div>
                         </div>
                         <div class="floor-con l">
@@ -112,7 +130,7 @@
                                         <c:forEach items="${list.replies}" var="reply">
                                             <!-- 回复部分,楼中楼 -->
                                             <li class="clearfix">
-                                                <div class="floor-ans-pho l"><img src="images/default.png"/></div>
+                                                <div class="floor-ans-pho l"><img src="/"/></div>
                                                 <div class="floor-ans-con l">
                                                     <span class="name">${reply.replyUserName}</span>：${reply.replyContent}
                                                     <span class="ans-time">${reply.replyTime}</span>
@@ -180,7 +198,7 @@
         <div class="mask"></div>
         <div class="win">
             <div class="win_hd">
-                <h4 class="l">回复<span id="floorSpan"></span>楼</h4>
+                <h4 class="l">回复</h4><span id="floorSpan"></span>楼</h4>
                 <span class="close r">&times;</span>
             </div>
             <div class="win_bd">
@@ -197,6 +215,32 @@
         </div>
     </div>
 </form>
+
+    <!-- 举报弹出框 -->
+    <form action="#" method="post" id="reportForm">
+        <input type="hidden" value="${article.articleId}" name="articleId" id="articleId-repot">
+        <input type="hidden" value="${user.userName}" name="reportUserName" id="reportUserName">
+        <div class="pop-box1 ft-box">
+            <div class="mask"></div>
+            <div class="win">
+                <div class="win_hd">
+                    <h4 class="l">举报<span id="floorSpan1"></span>
+                    <span class="close r">&times;</span>
+                    </h4>
+                </div>
+                <div class="win_bd">
+                    <div class="win_bd_b">
+                        <textarea id="reportContent" name="reportContent" placeholder="举报内容限于40字以内"></textarea>
+                    </div>
+                </div>
+                <div class="win_ft">
+                    <div class="win_ft_in">
+                        <input type="button" class="btn" value="举报" id="reportBtn"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
 
 
@@ -224,5 +268,57 @@ function showDialog(num,commentId) {
     $('.pop-box').css('display', 'block');
     $("#floorSpan").html(num);
 }
+$(function () {
+    //弹出举报框
+    $("#report").click(function () {
+        if(${user == null}){
+            alert('请先登录再进行举报');
+        }else{
+       var articleId =  $(this).attr("articleId");
+        $('.pop-box1').css('display', 'block');
+    }})
+    $.fn.serializeJson=function(){
+        var serializeObj={};
+        var array=this.serializeArray();
+        var str=this.serialize();
+        $(array).each(function(){
+            if(serializeObj[this.name]){
+                if($.isArray(serializeObj[this.name])){
+                    serializeObj[this.name].push(this.value);
+                }else{
+                    serializeObj[this.name]=[serializeObj[this.name],this.value];
+                }
+            }else{
+                serializeObj[this.name]=this.value;
+            }
+        });
+        return serializeObj;
+    };
+    //举报的ajax请求
+    $("#reportBtn").click(function () {
+        if($("#reportContent").val() == ""){
+            alert("请填写举报内容再提交.")
+            return;
+        }
+        var post_data=$("#reportForm").serializeJson();
+        $.ajax({
+            url:'${pageContext.request.contextPath}/article/report.do',
+            type:'post',
+            contentType:'application/json',
+            data:JSON.stringify(post_data),
+            success:function (data) {
+                if (data){
+                    alert("举报成功");
+                    location.reload();
+                } else {
+                    alert("举报失败");
+                    location.reload();
+                }
+            }
+        })
+    })
+})
+
+
 </script>
 </html>

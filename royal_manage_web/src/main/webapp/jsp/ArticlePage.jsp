@@ -102,15 +102,14 @@
                                 <td width="5%">${article.upvoteCount}</td>
                                 <td width="5%">${article.browseCount}</td>
                                 <td width="5%">${article.zone.zoneName}</td>
-                                <td width="5%">${article.isReport}</td>
 
                                 <td width="15%">
-                                    <a href="${pageContext.request.contextPath}/article/deleteArticle.do?id=${article.articleId}&pn=${articleMsgs.pageNum}" role="button" class="btn btn-primary">屏蔽</a>
+                                    <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&pn=${articleMsgs.pageNum}&status=1" role="button" class="btn btn-primary">屏蔽</a>
                                     <c:if test="${article.isTop==0}">
-                                        <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&pn=${articleMsgs.pageNum}" role="button" class="btn btn-danger" >置顶</a>
+                                        <a href="${pageContext.request.contextPath}/article/srtTop.do?id=${article.articleId}&pn=${articleMsgs.pageNum}&status=1" role="button" class="btn btn-danger" >置顶</a>
                                     </c:if>
                                     <c:if test="${article.isTop==1}">
-                                        <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&pn=${articleMsgs.pageNum}" role="button" class="btn btn-info" >取消</a>
+                                        <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&pn=${articleMsgs.pageNum}&status=0" role="button" class="btn btn-info" >取消</a>
                                     </c:if>
                                 </td>
                             </tr>
@@ -132,35 +131,35 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
                             <!--首页-->
-                            <li><a href="#" onclick="searchArticle(1)">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/article/findByPage.do?page=1&size=${articleMsgs.pageSize}" onclick="searchArticle(1)">首页</a></li>
                             <!--上一页-->
                             <li>
                                 <c:if test="${articleMsgs.hasPreviousPage}">
-                                        <a href="#" onclick="searchArticle('${articleMsgs.pageNum-1}')" aria-label="Previous">
+                                        <a href="${pageContext.request.contextPath}/article/findByPage.do?page=${articleMsgs.pageNum-1}&size=${articleMsgs.pageSize}" onclick="searchArticle('${articleMsgs.pageNum-1}')" aria-label="Previous">
                                             <span aria-hidden="true">«</span>
                                         </a>
                                 </c:if>
                             </li>
 
-                            <c:forEach items="${articleMsgs.navigatepageNums}" var="page_num">
-                                <c:if test="${page_num == articleMsgs.pageNum}">
-                                    <li class="active"><a href="#">${page_num}</a></li>
+                            <c:forEach items="${articleMsgs.navigatepageNums}" var="pageNum">
+                                <c:if test="${pageNum == articleMsgs.pageNum}">
+                                    <li class="active"><a href="${pageContext.request.contextPath}/article/findByPage.do?page=${pageNum}&size=${articleMsgs.pageSize}">${pageNum}</a></li>
                                 </c:if>
-                                <c:if test="${page_num != articleMsgs.pageNum}">
-                                    <li><a href="#" onclick="searchArticle('${page_num}')">${page_num}</a></li>
+                                <c:if test="${pageNum != articleMsgs.pageNum}">
+                                    <li><a href="${pageContext.request.contextPath}/article/findByPage.do?page=${pageNum}&size=${articleMsgs.pageSize}" onclick="searchArticle('${pageNum}')">${pageNum}</a></li>
                                 </c:if>
                             </c:forEach>
 
                             <!--下一页-->
                             <li>
                                 <c:if test="${articleMsgs.hasNextPage}">
-                                    <a href="javascript:void(0)" onclick="searchArticle('${articleMsgs.pageNum+1}')"
+                                    <a href="${pageContext.request.contextPath}/article/findByPage.do?page=${articleMsgs.pageNum+1}&size=${articleMsgs.pageSize}" onclick="searchArticle('${articleMsgs.pageNum+1}')"
                                        aria-label="Next">
                                         <span aria-hidden="true">»</span>
                                     </a>
                                 </c:if>
                             </li>
-                            <li><a href="javascript:void(0)" onclick="searchArticle('${articleMsgs.pages}')">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/article/findByPage.do?page=${articleMsgs.pages}&size=${articleMsgs.pageSize}" onclick="searchArticle('${articleMsgs.pages}')">尾页</a></li>
                         </ul>
                     </nav>
                 </div>

@@ -26,4 +26,10 @@ public interface ArticleService {
 
     Integer getTodayCount();
     boolean submitReport(Report report);
+
+    void addUpvoteCount(String articleId);
+
+    void subtractUpvoteCount(String articleId);
+
+    Integer findUpvoteCount(String articleId);
 }

@@ -96,6 +96,23 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
+    @Override
+    public void addUpvoteCount(String articleId) {
+        articleDao.addUpvoteCount(articleId);
+    }
+
+    @Override
+    public void subtractUpvoteCount(String articleId) {
+        articleDao.subtractUpvoteCount(articleId);
+    }
+
+    @Override
+    public Integer findUpvoteCount(String articleId) {
+        Integer upvoteCount= articleDao.findUpvoteCount(articleId);
+        return upvoteCount;
+    }
+
+
 //    //关键字搜索
 //    @Override
 //    public List<Article> findByKeyWord(String keyWord) {

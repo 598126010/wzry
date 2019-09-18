@@ -50,13 +50,12 @@
                 <div class="t clearfix">
                     <h2 class="l">${article.title}</h2>
                     <div class="hm-detail-fun l">
-					     <span class="icon-like">
-					         <a href="#"><i></i>3</a>
+					    <span class="icon-like" id="upvoteCount">
+					         <a href="#"><i></i>${article.upvoteCount}</a>
 					     </span>
-                        <span class="icon-talk">
-						     <i></i>10
+                        <span class="icon-talk" id="replyCount">
+						     <i></i>${article.replyCount}
 						</span>
-
                     </div>
                 </div>
             </div>
@@ -103,8 +102,11 @@
                             <div class="floor-ans"></div>
 
                         </div>
-                        <span  style="right: 100px"><a href="#" id="report" articleId = "${article.articleId}"><i></i>举报</a></span>
-                        <span class="icon-comment" style="right: 50px"><a href="#comment"> <i></i> 评论</a></span>
+                        <span class="icon-comment">
+                        <a href="javascript:;" onclick="upvote(${article.articleId})"> <i id="id1"></i> 点赞</a>
+                        <a href="#" id="report" articleId = "${article.articleId}"><i></i>举报</a>
+                        <a href="#comment"> <i></i> 评论</a>
+                        </span>
                     </div>
                 </li>
 
@@ -324,6 +326,37 @@ $(function () {
     })
 })
 
+/*点赞方法*/
+function upvote(articleid) {
+    if(${user == null}){
+        alert('请先登录再进行点赞');
+        return
+    }
+    $.ajax({
+        type: 'POST',
+        url: '/upvote/changeIsUpvote.do',
+        data: {"articleId": $("#articleId-repot").val()},
+        dataType: 'json',
+        success: function (result) {
+            $("#upvoteCount").html("<a href='#'><i></i>" + result + "</a>")
 
+            $.ajax({
+                type: 'POST',
+                url: '/upvote/findByUserNameAndArticleId.do',
+                data: {"articleId": $("#articleId-repot").val()},
+                dataType: 'json',
+                success: function (result) {
+                    if (result == 0) {
+                        $("#id1").css("background-position", "0px 0px");
+                    } else {
+                        $("#id1").css("background-position", "-112px -32px");
+                    }
+                }
+            });
+        }
+    });
+
+
+}
 </script>
 </html>

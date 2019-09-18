@@ -3,6 +3,7 @@ package com.bbs.dao;
 import com.bbs.domain.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -43,4 +44,13 @@ public interface ArticleDao {
     Integer getTotalCount();
     @Insert("insert into bbs_report_table(reportContent,reportUserName,reportStatus,articleId) values(#{reportContent},#{reportUserName},#{reportStatus},#{articleId})")
     int submitReport(Report report);
+
+    @Update("update bbs_article_table set upvoteCount = upvoteCount+1 where articleId=#{articleId}")
+    void addUpvoteCount(String articleId);
+
+    @Update("update bbs_article_table set upvoteCount = upvoteCount-1 where articleId=#{articleId}")
+    void subtractUpvoteCount(String articleId);
+
+    @Select("select upvoteCount from bbs_article_table where articleId = #{articleId}")
+    Integer findUpvoteCount(String articleId);
 }

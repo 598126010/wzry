@@ -127,7 +127,7 @@
             <div class="user-info-l l">
                 <div class="user-info-l-t">
                     <img src="" id="userPic"/>
-                    <div class="userName">${sessionScope.user.userName}</div>
+                    <div class="username">${sessionScope.user.userName}</div>
                 </div>
                 <ul class="user-info-l-b">
                     <li><i class="info-icon"></i>我的资料</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/search.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index-new.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/hm-bbs.js"></script>
 </head>
@@ -75,21 +76,41 @@
             <div class="list-view l">
                 <ul>
                     <c:forEach items="${articleList}" var="list">
-                        <li class="clearfix ding">
+                        <c:if test="${list.isTop == 1}">
+                            <li class="clearfix ding">
+                                <div class="hm-index-title">
+                                    <i class="set-to-top">顶</i> <a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>
+                                </div>
+                                <div class="hm-index-con">${list.content}</div>
+                                <div class="hm-index-info l">
+                                    <span class="article-username">${list.senderName}</span>
+                                    <span class="post-time">${list.sendTime}</span>
+                                </div>
+                                <div class="hm-index-fun r">
+                                    <span class="icon-like"><i></i>${list.upvoteCount}</span>
+                                    <span class="icon-talk"><i></i>${list.replyCount}</span>
+                                </div>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                        <c:forEach items="${articleList}" var="list">
+                       <c:if test="${list.isTop == 0}">
+                        <li class="clearfix">
                             <div class="hm-index-title">
-                                <i class="set-to-top">顶</i> <a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>
+                                <i class="set-to-top"></i><a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>
                             </div>
                             <div class="hm-index-con">${list.content}</div>
                             <div class="hm-index-info l">
-                                <span class="article-username">${list.senderName}</span>
-                                <span class="post-time">${list.sendTime}</span>
+                                <span class="article-username">${list.senderName}</span><span class="post-time">${list.sendTime}</span>
                             </div>
                             <div class="hm-index-fun r">
                                 <span class="icon-like"><i></i>${list.upvoteCount}</span>
                                 <span class="icon-talk"><i></i>${list.replyCount}</span>
                             </div>
-                        </li>
+                       </c:if>
                     </c:forEach>
+
+                    </li>
                 </ul>
             </div>
 

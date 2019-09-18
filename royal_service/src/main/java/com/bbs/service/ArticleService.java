@@ -1,9 +1,6 @@
 package com.bbs.service;
 
-import com.bbs.domain.Article;
-import com.bbs.domain.Comment;
-import com.bbs.domain.Reply;
-import com.bbs.domain.UserInfo;
+import com.bbs.domain.*;
 
 import java.util.List;
 
@@ -28,4 +25,5 @@ public interface ArticleService {
     Integer getTotalCount();
 
     Integer getTodayCount();
+    boolean submitReport(Report report);
 }

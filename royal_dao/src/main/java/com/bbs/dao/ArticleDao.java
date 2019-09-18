@@ -1,9 +1,6 @@
 package com.bbs.dao;
 
-import com.bbs.domain.Article;
-import com.bbs.domain.Comment;
-import com.bbs.domain.Reply;
-import com.bbs.domain.UserInfo;
+import com.bbs.domain.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -44,5 +41,6 @@ public interface ArticleDao {
     //全部帖子统计
     @Select("select count(1) from bbs_article_table;")
     Integer getTotalCount();
-
+    @Insert("insert into bbs_report_table(reportContent,reportUserName,reportStatus,articleId) values(#{reportContent},#{reportUserName},#{reportStatus},#{articleId})")
+    int submitReport(Report report);
 }

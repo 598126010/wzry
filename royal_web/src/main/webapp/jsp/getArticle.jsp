@@ -273,7 +273,12 @@ $(function () {
     $("#report").click(function () {
         if(${user == null}){
             alert('请先登录再进行举报');
-        }else{
+            return
+        }
+        if(${user.userName == article.senderName}){
+            alert('无法举报自己发布的帖子');
+            return
+        } else{
        var articleId =  $(this).attr("articleId");
         $('.pop-box1').css('display', 'block');
     }})

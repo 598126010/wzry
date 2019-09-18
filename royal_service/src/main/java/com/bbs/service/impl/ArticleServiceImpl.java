@@ -96,11 +96,11 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
-    //关键字搜索
-    @Override
-    public List<Article> findByKeyWord(String keyWord) {
-        return articleDao.findByKeyWord(keyWord);
-    }
+//    //关键字搜索
+//    @Override
+//    public List<Article> findByKeyWord(String keyWord) {
+//        return articleDao.findByKeyWord(keyWord);
+//    }
 
     //全部帖子统计
     @Override

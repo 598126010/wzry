@@ -40,8 +40,8 @@
                 </p>
             </div>
             <div class="search-box l">
-                <form action="${pageContext.request.contextPath}/articleSearch/search.do" method="get">
-                    <input type="text" name="title" class="txt l" placeholder="请输入关键字">
+                <form action="${pageContext.request.contextPath}/article/findByKeyWord.do" method="get">
+                    <input type="text" name="keyWord" class="txt l" placeholder="请输入关键字">
                     <input type="submit" value="搜索" class="btn l"/>
                 </form>
             </div>

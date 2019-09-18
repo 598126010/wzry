@@ -28,4 +28,6 @@ public interface ArticleService {
     Integer getTotalCount();
 
     Integer getTodayCount();
+
+    List<Article> findByKeyWord(String keyWord);
 }

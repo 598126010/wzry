@@ -126,10 +126,11 @@
             if(${user != null}){
                 $.post("${pageContext.request.contextPath}/user/userExist.do",{},function () {
                     location.reload();
+                    return
                 },"json")
             }else {
                 alert("登录超时")
-                location.reload();
+                <%--location.href = "${pageContext.request.contextPath}/index.jsp"--%>
             }
         })
         //调用方法校验用户名及密码

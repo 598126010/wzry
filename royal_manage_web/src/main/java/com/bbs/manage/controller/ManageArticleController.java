@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("article")
-public class ArticleController{
+@RequestMapping("manageArticle")
+public class ManageArticleController {
 
     @Autowired
     private manager_ArticleService manager_articleService;

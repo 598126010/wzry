@@ -1,4 +1,4 @@
-package com.bbs.controller;
+package com.bbs.manage.controller;
 
 import com.bbs.domain.Article;
 import com.bbs.domain.Comment;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -104,19 +103,5 @@ public class ArticleController {
         Integer totalCount = articleService.getTotalCount();
         return totalCount;
     }
-
-    //关键字查询
-    @RequestMapping("/findByKeyWord")
-    public ModelAndView findByKeyWord (@RequestParam(name = "keyWord")String keyWord) throws UnsupportedEncodingException {
-        ModelAndView mv = new ModelAndView();
-        if(keyWord!=null){
-            keyWord=new String(keyWord.getBytes("iso8859-1"),"utf-8");
-        }
-        List<Article> articleList = articleService.findByKeyWord(keyWord);
-        mv.addObject("articleList",articleList);
-        mv.setViewName("index");
-        return mv;
-    }
-
 
 }

@@ -45,7 +45,4 @@ public interface ArticleDao {
     @Select("select count(1) from bbs_article_table;")
     Integer getTotalCount();
 
-    //关键字搜索
-    @Select("select * from bbs_article_table where title like concat('%',#{keyWord},'%') or content like concat('%',#{keyWord},'%')")
-    List<Article> findByKeyWord(String keyWord);
 }

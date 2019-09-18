@@ -1,10 +1,7 @@
 package com.bbs.service.impl;
 
 import com.bbs.dao.ArticleDao;
-import com.bbs.domain.Article;
-import com.bbs.domain.Comment;
-import com.bbs.domain.Reply;
-import com.bbs.domain.UserInfo;
+import com.bbs.domain.*;
 import com.bbs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,6 +83,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Integer getTodayCount() {
         return articleDao.getTodayCount();
+    }
+    //举报
+    @Override
+    public boolean submitReport(Report report) {
+        int i = articleDao.submitReport(report);
+        if(i==1){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     //关键字搜索

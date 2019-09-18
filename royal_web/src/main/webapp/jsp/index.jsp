@@ -160,10 +160,10 @@
 <script>
     $(function () {
         $("#newTopicBtn").click(function () {
-            <%--if(${user==null}){--%>
-                <%--alert("请先登录用户")--%>
-                <%--return--%>
-            <%--}--%>
+            if(${user==null}){
+                alert("请先登录用户")
+                return
+            }
             $('.ft-box').fadeIn(120);
         })
     })

@@ -27,12 +27,6 @@
             <h1 class="logo l">
                 <a href="javascript:;"><img src="images/logo.png" height="64" width="168" alt=""/></a>
             </h1>
-            <div class="search-box l">
-                <form action="javascript:;">
-                    <input type="text" class="txt l" placeholder="请输入关键字">
-                    <input type="button" value="搜索" class="btn l"/>
-                </form>
-            </div>
         </div>
         <div class="hm-header-b">
             <i class="hm-ico-home"></i>
@@ -71,10 +65,8 @@
                         </li>
                         <li class="no-tips">
                             <div class="reg-l">&nbsp;&nbsp;邮&nbsp;&nbsp;&nbsp;箱：</div>
-                            <div class="reg-c">
-                                <input type="email" id="email" name="email" class="txt" value=""/>
-                                <br/>
-                                <span id="checkoutEmail"></span>
+                            <div>
+                                <input type="email" id="email" name="email" class="txt"/><span id="checkoutEmail"></span>
                             </div>
                         </li>
                         <li>
@@ -142,7 +134,7 @@
            var email = $("#email").val();
            var reslut = reg.test(email);
            if (!reslut){
-               $("#checkoutEmail").html("邮箱格式不正确")
+               $("#checkoutEmail").html("&nbsp;&nbsp;&nbsp;邮箱格式不正确")
 
            }
        })
@@ -163,45 +155,45 @@
            } else {
                alert("请填写正确信息再进行提交")
            }
-           /* if(checkEmail() && checkPassword() && checkUsername()){
+            if(checkEmail() && checkPassword() && checkUsername()){
                 $("#registerForm").submit;
             }else {
                 alert("请填写正确信息再进行提交")
             }
-        })*/
-       }
+        }
 
-  /* function checkUsername(){
-       var reg = /^[0-9a-zA-Z-_]*$/;
-       var username = $("#username").val();
-       var usernameStatus =  reg.test(username);
-       alert(usernameStatus)
-       if(usernameStatus){
-           return true;
-       }else {
-           return false;
-       }
-   }
-   function checkPassword(){
-       var password = $("#password").val();
-       var reg = /^[a-zA-Z0-9_]{3,10}$/;
-       var passwordStatus =  reg.test(password);
-       if(passwordStatus){
-           return true;
-       }else {
-           return false;
-       }
-   }
-   function checkEmail(){
-       var email = $("#email").val();
-       var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-       var emailStatus = reg.test(email);
-       if(passwordStatus){
-           return true;
-       }else {
-           return false;
-       }
-   }*/
+   //
+   // function checkUsername(){
+   //     var reg = /^[0-9a-zA-Z-_]*$/;
+   //     var username = $("#username").val();
+   //     var usernameStatus =  reg.test(username);
+   //     alert(usernameStatus)
+   //     if(usernameStatus){
+   //         return true;
+   //     }else {
+   //         return false;
+   //     }
+   // }
+   // function checkPassword(){
+   //     var password = $("#password").val();
+   //     var reg = /^[a-zA-Z0-9_]{3,10}$/;
+   //     var passwordStatus =  reg.test(password);
+   //     if(passwordStatus){
+   //         return true;
+   //     }else {
+   //         return false;
+   //     }
+   // }
+   // function checkEmail(){
+   //     var email = $("#email").val();
+   //     var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+   //     var emailStatus = reg.test(email);
+   //     if(passwordStatus){
+   //         return true;
+   //     }else {
+   //         return false;
+   //     }
+   // }
 </script>
 
 </body>

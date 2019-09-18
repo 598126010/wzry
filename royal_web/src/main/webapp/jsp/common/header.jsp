@@ -27,7 +27,7 @@
 
 
                     <a href='${pageContext.request.contextPath}/user/findUserInfo.do'>个人中心</a>
-                    <a href='${pageContext.request.contextPath}/user/userExist.do' id='userExist'>注销</a>
+                    <a href='#' id='userExist'>注销</a>
                 </c:if>
                 <c:if test="${empty user.userName || (user.userName eq null) }">
                     <a href="javascript:;" id="login" class="to-login">游客登录</a>
@@ -111,7 +111,7 @@
                     dataType:"JSON",
                     success:function(data){
                         if(data){
-                            location.href="${pageContext.request.contextPath}/index.jsp";
+                            location.reload();
                         }else{
                             alert("用户名或密码错误");
                         }
@@ -121,8 +121,17 @@
                 //用户名或密码输入非法
                 alert("请输入用户名和密码");
             }
-        });
-
+        })
+        $("#userExist").click(function () {
+            if(${user != null}){
+                $.post("${pageContext.request.contextPath}/user/userExist.do",{},function () {
+                    location.reload();
+                },"json")
+            }else {
+                alert("登录超时")
+                location.reload();
+            }
+        })
         //调用方法校验用户名及密码
         $("#userName").blur(checkUserName);
         $("#userPass").blur(checkPassWord);

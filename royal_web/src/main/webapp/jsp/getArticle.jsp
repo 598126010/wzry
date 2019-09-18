@@ -133,22 +133,33 @@
         <!--发表评论-->
         <div class="detail-to-comment">
             <div class="tit"><a name="comment">发表评论</a></div>
-            <!-- 未登录时候显示 <div class="con">您没有登录论坛，请登录后再进行回复</div>-->
+            <c:if test="${user == null}">
+            <div class="box">
+                <!-- 未登录时候显示 <div class="con">您没有登录论坛，请登录后再进行回复</div>-->
+               <span style="text-align: center;display:block;">您没有登录论坛，请 <a href="javascript:;" id="login" class="to-login"><h1 >登录</h1></a>后再进行回复</span>
+            </div>
+            </c:if>
+            <c:if test="${user.talkStatus == 1}">
+                <span style="text-align: center;display:block;"><h1>您被禁言中,无法发表评论</h1></span>
+            </c:if>
 
-            <!-- 登录后显示评论输入框-->
-            <form action="${pageContext.request.contextPath}/article/comment.do" method="post">
-                <input type="hidden" value="${article.articleId}" name="articleId">
-                <div class="con con-loged">
-                    <div class="con-t">
-                        <input type="hidden" name="commentUserName" value="${user.userName}">
-                        <textarea id="content" name="commentContent" placeholder="请在此输入您要回复的信息"></textarea>
+            <c:if test="${user != null && user.talkStatus == 0}">
+                <!-- 登录后显示评论输入框-->
+                <form action="${pageContext.request.contextPath}/article/comment.do" method="post">
+                    <input type="hidden" value="${article.articleId}" name="articleId">
+                    <div class="con con-loged">
+                        <div class="con-t">
+                            <input type="hidden" name="commentUserName" value="${user.userName}">
+                            <textarea id="content" name="commentContent" placeholder="请在此输入您要回复的信息"></textarea>
+                        </div>
+                        <div class="con-b">
+                            <input type="submit" class="btn"/>
+                            <span class="num">不能超过5000字</span>
+                        </div>
                     </div>
-                    <div class="con-b">
-                        <input type="submit" class="btn"/>
-                        <span class="num">不能超过5000字</span>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </c:if>
+
         </div>
     </div>
 </div>
@@ -205,6 +216,10 @@ function showDialog(num,commentId) {
 		alert("请登录");
 		return;
 	}
+	if (${user.talkStatus == 1}){
+	    alert("您已被禁言,无法回复评论")
+        return;
+    }
 	$("#commentId").val(commentId);
     $('.pop-box').css('display', 'block');
     $("#floorSpan").html(num);

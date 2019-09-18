@@ -5,7 +5,6 @@ import com.bbs.common.CommonCode;
 import com.bbs.common.ResponseResult;
 import com.bbs.domain.ResultInfo;
 import com.bbs.domain.UserInfo;
-
 import com.bbs.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,10 +67,8 @@ public class UserController {
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
         if(userInfo != null){
             userService.updateLoginStatus(userInfo.getUserId(),0);
+            request.getSession().removeAttribute("user");
         }
-        request.getSession().removeAttribute("user");
-
-        response.sendRedirect(request.getContextPath()+"/index.jsp");
     }
 
     //跳转登入

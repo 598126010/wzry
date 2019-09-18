@@ -82,5 +82,19 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.findOnlineUser();
     }
 
+    //今日帖子统计
+    @Override
+    public Integer getTodayCount() {
+        return articleDao.getTodayCount();
+    }
+
+    //全部帖子统计
+    @Override
+    public Integer getTotalCount() {
+        return articleDao.getTotalCount();
+    }
+
+
+
 
 }

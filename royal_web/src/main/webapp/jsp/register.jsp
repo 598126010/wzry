@@ -25,7 +25,7 @@
     <div class="hm-inner clearfix">
         <div class="hm-header-t clearfix">
             <h1 class="logo l">
-                <a href="javascript:;"><img src="images/logo.png" height="64" width="168" alt=""/></a>
+                <a href="javascript:;"><img src="/images/logo.png" height="64" width="168" alt=""/></a>
             </h1>
         </div>
         <div class="hm-header-b">
@@ -140,7 +140,7 @@
        })
    })
        function submitForm() {
-           alert("11")
+           //alert("11")
            var email = $("#email").val();
            var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
            var emailStatus = reg.test(email);

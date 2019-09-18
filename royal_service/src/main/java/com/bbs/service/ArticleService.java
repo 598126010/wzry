@@ -24,4 +24,8 @@ public interface ArticleService {
     List<Reply> findReplyByCommentId(Integer commentId);
 
     List<UserInfo> findOnlineUser();
+
+    Integer getTotalCount();
+
+    Integer getTodayCount();
 }

@@ -124,7 +124,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * 获取所有交流区
      * @return
      */
     @Override

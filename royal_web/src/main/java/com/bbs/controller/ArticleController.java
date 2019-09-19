@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,11 +86,16 @@ public class ArticleController {
         //显示在线用户
         List<UserInfo> onlineUsers = articleService.findOnlineUser();
         PageInfo pageInfo = new PageInfo(list);
+
+        //排行榜1
+        List<Article> articles = articleService.findTop1Article();
+        mv.addObject("topArticle",articles);
         mv.addObject("onlineUser", onlineUsers);
+
         mv.addObject("zoneList", zoneList);
         mv.addObject("pageInfo", pageInfo);
         mv.addObject("zoneId", id);
-        mv.setViewName("/index");
+        mv.setViewName("index");
         return mv;
     }
 
@@ -198,22 +204,18 @@ public class ArticleController {
         if(keyWord!=null){
             keyWord=new String(keyWord.getBytes("iso8859-1"),"utf-8");
         }
+        System.out.println(keyWord);
         List<Article> articleList =  articleService.findByKeyWord(keyWord);
         mv.addObject("articleList",articleList);
         mv.setViewName("index");
         return mv;
     }
-    //点击获取热度第一的帖子
+    //点击获取热度前三的帖子
     @RequestMapping("findTop1Article")
-    public ModelAndView findTop1Article(@RequestParam(name = "articleId",required = true)Integer articleId){
+    public ModelAndView findTop1Article(){
         ModelAndView mv = new ModelAndView();
-        Article article = null;
-        try {
-            article = articleService.findTop1Article(articleId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mv.addObject("article",article);
+        List<Article> article = articleService.findTop1Article();
+        mv.addObject("topArticle",article);
         mv.setViewName("getArticle");
         return mv;
     }

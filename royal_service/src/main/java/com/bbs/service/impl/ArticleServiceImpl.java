@@ -37,6 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
         return  articleDao.findArticleListByZoneId(id);
     }
 
+
     /**
      * 根据ArticleId获取评论信息
      * @param id
@@ -100,10 +101,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
-    //点击获取热度第一的帖子
+    //点击获取热度前三的帖子
     @Override
-    public Article findTop1Article(Integer articleId) {
-         return articleDao.findTop1Article(articleId);
+    public List<Article> findTop1Article() {
+         return articleDao.findTop1Article();
     }
 
     //关键字搜索
@@ -131,11 +132,11 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.findAllZone();
     }
 
-//    //关键字搜索
-//    @Override
-//    public List<Article> findByKeyWord(String keyWord) {
-//        return articleDao.findByKeyWord(keyWord);
-//    }
+    //关键字搜索
+    @Override
+    public List<Article> findByKeyWord(String keyWord) {
+        return articleDao.findByKeyWord(keyWord);
+    }
 
     //全部帖子统计
     @Override

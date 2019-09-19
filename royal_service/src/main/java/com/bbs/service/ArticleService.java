@@ -10,7 +10,7 @@ public interface ArticleService {
 
     void saveComment(Comment comment);
 
-    List<Article> findArticleListByZoneId(int id);
+//    List<Article> findArticleListByZoneId(int id);
 
     List<Comment> getArticleByArticleId(int id);
 
@@ -29,6 +29,10 @@ public interface ArticleService {
     List<Article> findByKeyWord(String keyWord);
 
     boolean submitReport(Report report);
-
-    Article findTop1Article(Integer articleId);
+    List<Zone> findAllZone();
+    List<Article> findTop1Article();
+    Integer findUpvoteCount(String articleId);
+    void subtractUpvoteCount(String articleId);
+    void addUpvoteCount(String articleId);
+    List<Article> findArticleListByZoneId(int id, int pageSize, int pageNum);
 }

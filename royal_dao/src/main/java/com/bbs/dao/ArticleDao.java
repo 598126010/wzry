@@ -85,8 +85,6 @@ public interface ArticleDao {
     //全部帖子统计
     @Select("select count(1) from bbs_article_table;")
     Integer getTotalCount();
-    @Insert("insert into bbs_report_table(reportContent,reportUserName,reportStatus,articleId) values(#{reportContent},#{reportUserName},#{reportStatus},#{articleId})")
-    int submitReport(Report report);
 
     @Update("update bbs_article_table set upvoteCount = upvoteCount+1 where articleId=#{articleId}")
     void addUpvoteCount(String articleId);
@@ -108,6 +106,7 @@ public interface ArticleDao {
     @Insert("insert into bbs_report_table(reportContent,reportUserName,reportStatus,articleId) values(#{reportContent},#{reportUserName},#{reportStatus},#{articleId})")
     int submitReport(Report report);
 
-    @Select("SELECT * FROM bbs_article_table WHERE (replyCount+upvoteCount) = (SELECT MAX(replyCount+upvoteCount) FROM bbs_article_table)")
-    Article findTop1Article(Integer articleId);
+    @Select("SELECT *  FROM bbs_article_table ORDER BY (replyCount+upvoteCount) DESC LIMIT 0,3")
+    List<Article> findTop1Article();
+
 }

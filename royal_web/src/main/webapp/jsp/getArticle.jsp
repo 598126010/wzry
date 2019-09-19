@@ -148,9 +148,18 @@
                         </div>
                     </li>
                 </c:forEach>
-                
+                <div class="aside l">
+                    <div class="aside-box">
+                        <h3 style="font-size: x-large" align="center">热门帖子排行榜</h3>
+                    </div><br>
 
-        <!--发表评论-->
+
+
+
+                </div>
+
+
+                <!--发表评论-->
         <div class="detail-to-comment">
             <div class="tit"><a name="comment">发表评论</a></div>
             <c:if test="${user == null}">

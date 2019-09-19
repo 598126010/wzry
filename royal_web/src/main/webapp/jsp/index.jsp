@@ -182,7 +182,7 @@
                     <ul class="b clearfix">
                         <c:forEach items="${onlineUser}" var="onlineUser">
                             <li>
-                                <div><img src="/${onlineUser.picUrl}" height="55"/> </div>
+                                <div><img src="${onlineUser.picUrl}" height="55"/> </div>
                                 <p>${onlineUser.userName}</p>
                             </li>
                         </c:forEach>
@@ -194,9 +194,17 @@
                     <h3 style="font-size: x-large" align="center">热门帖子排行榜</h3>
                 </div><br>
 
-                <div id="top1" align="center"><a href="/article/findTop1Article.do?articleId=${article.articleId}" style="font-size: larger">👍状元:${article.title}</a></div><br>
-                <div id="top2" align="center"><a href="/article/getArticle.do?articleId=7" style="font-size: larger">👀榜眼:今天天气不错！</a></div><br>
-                <div id="top3" align="center"><a href="/article/getArticle.do?articleId=12" style="font-size: larger">🌸探花:嘻嘻嘻嘻</a></div>
+                <c:forEach items="${topArticle}" var="article" varStatus="i">
+                    <c:if test="${i.index == 0}">
+                        <div id="top1" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
+                    </c:if>
+                    <c:if test="${i.index == 1}">
+                        <div id="top2" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
+                    </c:if>
+                    <c:if test="${i.index == 2}">
+                        <div id="top3" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
+                    </c:if>
+                </c:forEach>
 
 
             </div>
@@ -213,7 +221,10 @@
                 </c:forEach>
                 <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=${pageInfo.pageNum}">»</a></li>
 
+            </ul>
 
+
+        </div>
             </ul>
         </div>
     </div>
@@ -259,6 +270,9 @@
     </div>
 </form>
 <script>
+
+
+
     $(function () {
         $("#newTopicBtn").click(function () {
             if(${user==null}){

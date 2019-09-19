@@ -54,7 +54,8 @@
 					         <a href="#"><i></i>${article.upvoteCount}</a>
 					     </span>
                         <span class="icon-talk" id="replyCount">
-						     <i></i>${article.replyCount}
+						     <i></i><c:if test="${article.replyCount == null}">0</c:if>
+                                    <c:if test="${article.replyCount != null}">${article.replyCount}</c:if>
 						</span>
                     </div>
                 </div>

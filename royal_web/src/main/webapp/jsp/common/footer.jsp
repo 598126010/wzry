@@ -6,11 +6,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-    if (screen && screen.width > 480) {
-        document.write('<script type="text/javascript" color="230, 179, 255" opacity="1" zIndex="-2" count="99" src="${pageContext.request.contextPath}/js/canvas-nest.js"><\/script>');
-    }
-</script>
+<%--<script>--%>
+    <%--if (screen && screen.width > 480) {--%>
+        <%--document.write('<script type="text/javascript" color="230, 179, 255" opacity="1" zIndex="-2" count="99" src="${pageContext.request.contextPath}/js/canvas-nest.js"><\/script>');--%>
+    <%--}--%>
+<%--</script>--%>
 
 
 <div class="hm-footer" style="padding-top:10px;">

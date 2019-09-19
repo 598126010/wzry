@@ -9,7 +9,6 @@
     <script src="/bootstrap/jquery-1.11.0.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="/bootstrap/bootstrap.min.js"></script>
-
 </head>
 <body>
 <div class="container">
@@ -18,20 +17,17 @@
             <div class="login-panel panel panel-default"style="margin-top:-130px" >
                 <div class="panel-heading">
                     <h3 class="panel-title" style="text-align: center;">王者荣耀论坛管理后台</h3>
-                </div>
-                <div class="panel-body">
+                </div>                <div class="panel-body">
                     <div id="errorMsg" class="alert alert-danger" ></div>
-                    <form role="form" method="post" id="login_form">
+                    <form role="form" method="post" id="login_form" action="${pageContext.request.contextPath}/login.do">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="用户名" name="username" autofocus>
+                                <input class="form-control" placeholder="用户名" name="username">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="密码" name="userpass" type="password">
                             </div>
-                            <!-- Change this to a button or input when using this as a form -->
-                            <!--<a href="javascript:void(0)" class="btn btn-lg btn-success btn-block" id='login_btn'>登录</a>-->
-                            <input type="button" id="btn_sub" class="btn btn-lg btn-success btn-block" value="登录">
+                            <input type="submit" id="btn_sub" class="btn btn-lg btn-success btn-block" value="登录">
                         </fieldset>
                     </form>
 

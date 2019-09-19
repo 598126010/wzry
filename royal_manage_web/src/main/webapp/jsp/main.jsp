@@ -6,13 +6,13 @@
 <body>
 <div class="hrms_container">
     <!-- 导航条 -->
-    <%@ include file="./commom/head.jsp"%>
+    <%@ include file="commom/head.jsp"%>
 
     <!-- 中间部分-->
     <div class="hrms_body" style="position:relative; top:-15px;">
 
         <!-- 左侧栏 -->
-        <%@ include file="./commom/leftsidebar.jsp"%>
+        <%@ include file="commom/leftsidebar.jsp"%>
 
         <!-- 中间轮播图内容 -->
         <div class="hrms_main_ad col-sm-10">
@@ -32,7 +32,7 @@
                             <div class="item active" style="text-align: center;">
                                 <img class="img-responsive center-block" src="/img/img1.jpg" alt="company1">
                                 <div class="carousel-caption">
-                                    <h3>妲己</h3>
+                                    <h3>妲己</h3>/
                                 </div>
                             </div>
                             <div class="item">
@@ -65,7 +65,7 @@
         </div><!-- /.hrms_main_ad -->
     </div><!-- /.hrms_body -->
     <!-- 尾部 -->
-    <%@ include file="./commom/foot.jsp"%>
+    <%@ include file="commom/foot.jsp"%>
 </div><!-- /.hrms_container -->
 
 </body>

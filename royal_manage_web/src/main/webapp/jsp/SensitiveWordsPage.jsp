@@ -62,6 +62,7 @@
                                 <tr>
                                     <th colspan="2">
                                         <input type="hidden" name="addword">
+                                        <input type="hidden" name="lastPage" value="${wordsMsgs.pages}">
                                         <input type="button" onclick="addWord()" value="新增敏感词汇" class="form-control btn-primary">
                                     </th>
                                 </tr>

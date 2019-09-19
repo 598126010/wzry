@@ -5,14 +5,7 @@ import com.bbs.domain.UserInfo;
 import com.bbs.service.Manage_UserService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import javax.management.relation.Role;
-import java.util.ArrayList;
 
 import java.util.List;
 @Service
@@ -36,5 +29,11 @@ public class Manage_UserServiceImpl implements Manage_UserService {
     @Override
     public void jingyan(int userId,int talkStatus) {
         manage_userDao.jingyan(userId,talkStatus);
+    }
+
+    @Override
+    public List<UserInfo> findAllUser(int page, int size) {
+        PageHelper.startPage(page,size);
+        return manage_userDao.findAllUser();
     }
 }

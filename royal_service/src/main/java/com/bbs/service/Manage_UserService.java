@@ -13,4 +13,5 @@ public interface Manage_UserService{
 
     void jingyan(int userId,int talkStatus);
 
+    List<UserInfo> findAllUser(int page, int size);
 }

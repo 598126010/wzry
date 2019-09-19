@@ -7,7 +7,10 @@
                 <span class="glyphicon glyphicon-user" aria-hidden="true">用户管理</span>
             </a>
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="${pageContext.request.contextPath}/user/findByPage.do?page=1" >用户信息</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/user/findByPage.do?page=1" >用户升级申请管理</a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="${pageContext.request.contextPath}/user/manageAllUser.do?page=1" >用户管理</a></li>
             </ul>
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"><a href="${pageContext.request.contextPath}/zoneApply/findAll.do?page=1" >版块审核</a></li>

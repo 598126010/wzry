@@ -5,8 +5,6 @@ import com.bbs.domain.Report;
 import com.bbs.domain.Word;
 import com.bbs.service.manager_ArticleService;
 import com.github.pagehelper.PageInfo;
-import jdk.nashorn.internal.ir.RuntimeNode;
-import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -122,11 +120,11 @@ public class ArticleController {
 
     //    添加敏感词
     @RequestMapping("/addWords.do")
-    public String addWords(@RequestParam("addword")String word){
+    public String addWords(@RequestParam("addword")String word,int lastPage){
 
         manager_articleService.addWords(word);
 
-        return "redirect:/article/SensitiveWordsPage.do";
+        return "redirect:/article/SensitiveWordsPage.do?page="+lastPage;
     }
 
     //    查询相关帖子

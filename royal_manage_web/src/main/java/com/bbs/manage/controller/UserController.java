@@ -40,5 +40,14 @@ public class UserController {
         manage_userService.jingyan(userId,talkStatus);
         return "redirect:/user/findByPage.do?page="+page;
     }
+    //管理所有用户
+    @RequestMapping("manageAllUser.do")
+    public ModelAndView manageAllUser(ModelAndView mv,@RequestParam(name = "page",required = true,defaultValue = "1") int page, @RequestParam(name = "size",required = true,defaultValue = "5") int size){
+     List<UserInfo> userInfoList  =   manage_userService.findAllUser(page,size);
+     PageInfo pageInfo = new PageInfo(userInfoList);
+     mv.addObject("userInfo",pageInfo);
+     mv.setViewName("yonghu");
+        return mv;
+    }
 
 }

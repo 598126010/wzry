@@ -112,6 +112,14 @@ public class ArticleServiceImpl implements ArticleService {
         return upvoteCount;
     }
 
+    /**
+     * 获取所有交流区
+     * @return
+     */
+    @Override
+    public List<Zone> findAllZone() {
+        return articleDao.findAllZone();
+    }
 
 //    //关键字搜索
 //    @Override

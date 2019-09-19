@@ -36,4 +36,6 @@ public interface UserService {
 
     //统计用户发帖数
     Integer getCount(String userName);
+
+    UserInfo findByUsername(String userName);
 }

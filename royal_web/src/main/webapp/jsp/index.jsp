@@ -12,6 +12,31 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/hm-bbs.js"></script>
+    <style>
+        ul.pagination {
+            display: inline-block;
+            padding: 5px 20%;
+            margin: 0;
+            /*align-content: center;*/
+        }
+
+        ul.pagination li {display: inline;}
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+        ul.pagination li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+    </style>
 </head>
 <body>
 
@@ -53,18 +78,19 @@
 
         <!-- 导航 -->
         <ul class="hm-bbs-nav border-lrb clearfix">
-            <li class="current">
-                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=1"><em></em>综合交流区</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=2"><em></em>BUG反馈区</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=3"><em></em>新闻公告区</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=4"><em></em>活动专区</a>
-            </li>
+            <c:forEach items="${zoneList}" var="zone">
+                <c:if test="${zone.zoneId == zoneId}">
+                    <li class="current">
+                        <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=${zone.zoneId}"><em></em>${zone.zoneName}</a>
+                    </li>
+                </c:if>
+                <c:if test="${zone.zoneId != zoneId}">
+                    <li >
+                        <a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?zoneId=${zone.zoneId}"><em></em>${zone.zoneName}</a>
+                    </li>
+                </c:if>
+
+            </c:forEach>
         </ul>
 
 
@@ -136,12 +162,21 @@
                     </ul>
                 </div>
             </div>
-
-
-
+            <ul class="pagination" >
+                <li><a href="#">«</a></li>
+                <li><a href="#">1</a></li>
+                <li><a class="active" href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#">»</a></li>
+            </ul>
         </div>
     </div>
 </div>
+
 
 
 <!-- 底部 -->
@@ -156,7 +191,7 @@
 </div>
 
 <!-- 发帖弹出框 -->
-<form action="${pageContext.request.contextPath}/article/createNewArticle.do?" method="post">
+<form action="${pageContext.request.contextPath}/article/createNewArticle.do?" method="post" id="reportArticle">
     <input type="hidden" value="${user.userName}" name="senderName">
     <input type="hidden" value="${zoneId}" name="zoneId">
     <div class="pop-box ft-box">
@@ -175,7 +210,7 @@
             </div>
             <div class="win_ft">
                 <div class="win_ft_in">
-                    <input type="submit" class="btn" value="发表"/>
+                    <input type="button" class="btn" value="发表" id="Article"/>
                 </div>
             </div>
         </div>
@@ -192,6 +227,19 @@
                 return;
             }
             $('.ft-box').fadeIn(120);
+        })
+        $("#Article").click(function () {
+            var title =$("#title").val();
+            var content = $("#content").val();
+            if(title == ""){
+                alert("请输入标题")
+                return
+            }
+            if(content == ""){
+                alert("请输入内容")
+                return
+            }
+            $("#reportArticle").submit();
         })
 
         $.post("/article/getTotalCount.do",{},function(result){

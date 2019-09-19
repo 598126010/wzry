@@ -1,6 +1,5 @@
 package com.bbs.controller;
 
-
 import com.bbs.common.CommonCode;
 import com.bbs.common.ResponseResult;
 import com.bbs.domain.ResultInfo;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +30,7 @@ public class UserController {
 
     /**
      * 用户登入
+     *
      * @param userName
      * @param userPass
      * @param request
@@ -38,19 +39,19 @@ public class UserController {
      */
     @PostMapping("/userLogin.do")
     @ResponseBody
-    public String userLogin(@Param("userName")String userName, @Param("userPass")String userPass, HttpServletRequest request, Model model){
+    public String userLogin(@Param("userName") String userName, @Param("userPass") String userPass, HttpServletRequest request, Model model) {
         UserInfo user = new UserInfo();
         user.setUserName(userName);
         user.setUserPass(userPass);
         UserInfo u = userService.login(user);
-        if(u == null){
+        if (u == null) {
             //登录失败
             return "false";
-        }else{
+        } else {
             //登录成功
             //request.getSession().setAttribute("username",u.getUsername());
             userService.updateLoginStatus(u.getUserId(), 1);
-            request.getSession().setAttribute("user",u);
+            request.getSession().setAttribute("user", u);
             System.out.println(u);
             return "true";
         }
@@ -58,6 +59,7 @@ public class UserController {
 
     /**
      * 用户注销
+     *
      * @param request
      * @param response
      * @throws IOException
@@ -65,8 +67,8 @@ public class UserController {
     @RequestMapping("/userExist.do")
     public void userExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
-        if(userInfo != null){
-            userService.updateLoginStatus(userInfo.getUserId(),0);
+        if (userInfo != null) {
+            userService.updateLoginStatus(userInfo.getUserId(), 0);
             request.getSession().removeAttribute("user");
         }
     }
@@ -163,22 +165,33 @@ public class UserController {
      * @return
      */
     @RequestMapping("/findUserInfo.do")
-    public String findUserInfo(HttpServletRequest request){
+    public ModelAndView findUserInfo(HttpServletRequest request,ModelAndView mv){
         UserInfo user = (UserInfo) request.getSession().getAttribute("user");
         if(user == null){
-            return "redirect:/index.jsp";
+            mv.setViewName("redirect:/index.jsp");
         }
-        UserInfo user1 = userService.findById(user.getUserId());
+        UserInfo user1 = userService.findByUsername(user.getUserName());
+        request.getSession().removeAttribute("user");
         request.getSession().setAttribute("user",user1);
-        return "userInfo";
+        mv.addObject("user",user1);
+        mv.setViewName("userInfo");
+        return mv;
     }
 
     @RequestMapping("/findUserPwd.do")
     public String findUserPwd(){
         return "userPwd";
     }
+
+    /**
+     * 用户注册
+     * @param userInfo
+     * @param request
+     * @return
+     */
     @RequestMapping("/register.do")
     public String register(UserInfo userInfo,HttpServletRequest request){
+        userInfo.setLoginStatus(1);
       boolean result =   userService.saveUser(userInfo);
       if (result){
           request.getSession().setAttribute("user",userInfo);
@@ -189,7 +202,7 @@ public class UserController {
     }
     @RequestMapping("checkOutUsername.do")
     @ResponseBody
-    public ResultInfo checkOutUsername( String username){
+    public ResultInfo checkOutUsername(String username){
         boolean result = userService.checkOutUsername(username);
         String msg;
         //存在为false,不存在为true

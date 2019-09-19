@@ -130,8 +130,8 @@
                     <div class="username">${sessionScope.user.userName}</div>
                 </div>
                 <ul class="user-info-l-b">
-                    <li><i class="info-icon"></i>我的资料</li>
-                    <li class="cur"><i class="safe-icon"></i>修改密码</li>
+                    <li ><a href="${pageContext.request.contextPath}/user/findUserInfo.do"><i class="info-icon"></i>我的资料</a></li>
+                    <li class="cur"><a href="${pageContext.request.contextPath}/user/findUserPwd.do"><i class="safe-icon"></i>修改密码</a></li>
                 </ul>
             </div>
 

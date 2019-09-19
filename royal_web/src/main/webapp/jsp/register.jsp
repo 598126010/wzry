@@ -115,7 +115,7 @@
        $("#password").blur(function () {
           // 密码长度必须6~10位的英文或数字
            var password = $("#password").val();
-           var reg = /^[a-zA-Z0-9_]{3,10}$/;
+           var reg = /^[a-zA-Z0-9_]{6,10}$/;
            if(password){
            var reslut = reg.test(password);
            if (!reslut){
@@ -132,10 +132,13 @@
        $("#email").blur(function () {
            var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
            var email = $("#email").val();
-           var reslut = reg.test(email);
-           if (!reslut){
+           if(email != ""){
+               var reslut = reg.test(email);
+           if (!reslut) {
                $("#checkoutEmail").html("&nbsp;&nbsp;&nbsp;邮箱格式不正确")
-
+           }
+           }else if (email == "") {
+               $("#checkoutEmail").html("")
            }
        })
    })
@@ -148,18 +151,14 @@
            var username = $("#username").val();
            var usernameStatus = reg.test(username);
            var password = $("#password").val();
-           var reg = /^[a-zA-Z0-9_]{3,10}$/;
+           var reg = /^[a-zA-Z0-9_]{6,10}$/;
            var passwordStatus = reg.test(password);
            if (passwordStatus && usernameStatus && emailStatus) {
                $("#registerForm").submit();
+               return;
            } else {
                alert("请填写正确信息再进行提交")
            }
-            if(checkEmail() && checkPassword() && checkUsername()){
-                $("#registerForm").submit;
-            }else {
-                alert("请填写正确信息再进行提交")
-            }
         }
 
    //

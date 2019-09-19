@@ -96,4 +96,6 @@ public interface ArticleDao {
     //统计回帖人数
     @Select("SELECT COUNT(*) FROM bbs_comment_table GROUP BY articleId  HAVING articleId =#{articleId}")
     Integer findRepleyCountByArticleId(Integer articleId);
+    @Select("select * from bbs_zone_table")
+    List<Zone> findAllZone();
 }

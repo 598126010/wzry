@@ -32,4 +32,6 @@ public interface ArticleService {
     void subtractUpvoteCount(String articleId);
 
     Integer findUpvoteCount(String articleId);
+
+    List<Zone> findAllZone();
 }

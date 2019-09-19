@@ -125,8 +125,8 @@
         $("#userExist").click(function () {
             if(${user != null}){
                 $.post("${pageContext.request.contextPath}/user/userExist.do",{},function () {
-                    location.reload();
-                    return
+
+                        location.reload();
                 },"json")
             }else {
                 alert("登录超时")

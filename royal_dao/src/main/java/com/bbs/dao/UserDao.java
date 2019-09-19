@@ -43,7 +43,7 @@ public interface UserDao {
     //校验用户名是否重复
     @Select("select * from bbs_user_table where userName = #{username}")
     UserInfo findUserInfoByUsername(String username);
-    @Insert("insert into bbs_user_table(userName,userPass,email) values(#{userName},#{userPass},#{email})")
+    @Insert("insert into bbs_user_table(userName,userPass,email,loginStatus) values(#{userName},#{userPass},#{email},#{loginStatus})")
     int saveUser(UserInfo userInfo);
 
     //查询旧密码

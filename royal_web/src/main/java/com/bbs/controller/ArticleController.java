@@ -51,6 +51,8 @@ public class ArticleController {
     public ModelAndView findArticleListByZoneId(ModelAndView mv, @RequestParam(name = "zoneId", required = true, defaultValue = "1") int id) {
         //根据获取的交流区Id查询帖子集合
         List<Article> list = articleService.findArticleListByZoneId(id);
+        //获取交流区集合
+        List<Zone> zoneList = articleService.findAllZone();
         //获取敏感词集合
         List<Word> wordList = wordService.findAllWord();
         //遍历敏感词
@@ -61,12 +63,8 @@ public class ArticleController {
                     //过滤内容
                     if (article.getContent().contains(word.getWord())) {
                         String content = article.getContent();
-                        System.out.println(content);
                         String keyWord = word.getWord();
                         content = content.replace(content.substring(content.indexOf(keyWord), content.indexOf(keyWord) + keyWord.length()), "***");
-                        System.out.println(content);
-                        article.setContent(content);
-
                     }
                     //过滤标题
                     if (article.getTitle().contains(word.getWord())) {
@@ -84,7 +82,7 @@ public class ArticleController {
         List<UserInfo> onlineUsers = articleService.findOnlineUser();
 
         mv.addObject("onlineUser", onlineUsers);
-
+        mv.addObject("zoneList", zoneList);
         mv.addObject("articleList", list);
         mv.addObject("zoneId", id);
         mv.setViewName("/index");
@@ -97,6 +95,7 @@ public class ArticleController {
     @RequestMapping("/getArticle")
     public ModelAndView getArticle(ModelAndView mv, @RequestParam(name = "articleId", required = true) int id) {
         Article article = articleService.findArticleByArticleId(id);
+
         //根据articleId获取comment集合
         List<Comment> commentList = articleService.getArticleByArticleId(id);
         for (Comment comment : commentList) {
@@ -122,32 +121,33 @@ public class ArticleController {
                     List<Reply> replies = comment.getReplies();
                     //过滤回复
                     for (Reply reply : replies) {
-                            if (reply.getReplyContent().contains(word.getWord())) {
-                                //获取回复信息
-                                String content = reply.getReplyContent();
-                                String keyWord = word.getWord();
-                                content = content.replace(content.substring(content.indexOf(keyWord), content.indexOf(keyWord) + keyWord.length()), "***");
-                                reply.setReplyContent(content);
-                                continue;
-                            }
+                        if (reply.getReplyContent().contains(word.getWord())) {
+                            //获取回复信息
+                            String content = reply.getReplyContent();
+                            String keyWord = word.getWord();
+                            content = content.replace(content.substring(content.indexOf(keyWord), content.indexOf(keyWord) + keyWord.length()), "***");
+                            reply.setReplyContent(content);
+                            continue;
+                        }
                     }
                     //过滤article
                     if (article.getContent().contains(word.getWord())) {
                         String content = article.getContent();
                         String KeyWord = word.getWord();
-                        content = content.replace(content.substring(content.indexOf(KeyWord),content.indexOf(KeyWord)+KeyWord.length()),"***");
+                        content = content.replace(content.substring(content.indexOf(KeyWord), content.indexOf(KeyWord) + KeyWord.length()), "***");
                         article.setContent(content);
                     }
                 }
             }
         }
 
-                    //将article对象传入request域中
-                    mv.addObject("article", article);
-                    mv.addObject("commentList", commentList);
-                    mv.setViewName("getArticle");
-                    return mv;
-                }
+        //将article,commentList传入request域中
+        mv.addObject("article", article);
+
+        mv.addObject("commentList", commentList);
+        mv.setViewName("getArticle");
+        return mv;
+    }
     /**
      * 创建新的帖子
      */
@@ -185,6 +185,6 @@ public class ArticleController {
         return new ResultInfo("",result);
 //        return "redirect:getArticle.do?articleId="+report.getArticleId();
     }
-
+    //获取交流区信息
 
 }

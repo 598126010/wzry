@@ -120,8 +120,8 @@
                     <div class="username" >${sessionScope.user.userName}</div>
                 </div>
                 <ul class="user-info-l-b">
-                    <li class="cur"><i class="info-icon"></i>我的资料</li>
-                    <li><i class="safe-icon"></i>修改密码</li>
+                    <li class="cur"><a href="${pageContext.request.contextPath}/user/findUserInfo.do"><i class="info-icon"></i>我的资料</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/findUserPwd.do"><i class="safe-icon"></i>修改密码</a></li>
                 </ul>
             </div>
 
@@ -143,13 +143,13 @@
                 <form action="${pageContext.request.contextPath}/user/upload.do" method="post" id="uploadForm" enctype="multipart/form-data">
                     <ul class="bd">
                         <li class="clearfix">
-                            <input type="hidden" id="userId" name="userId" value="${sessionScope.user.userId}"/>
+                            <input type="hidden" id="userId" name="userId" value="${user.userId}"/>
                             <div class="info-l"><i class="red">*</i>用户名：</div>
-                            <div class="info-r"><input type="text" class="txt" value="${sessionScope.user.userName}" readonly="readonly" /></div>
+                            <div class="info-r"><input type="text" class="txt" value="${user.userName}" readonly="readonly" /></div>
                         </li>
                         <li class="clearfix">
                             <div class="info-l">邮箱地址：</div>
-                            <div class="info-r"><input type="text" id="email" name="email" class="txt" value="${sessionScope.user.email}" /></div>
+                            <div class="info-r"><input type="text" id="email" name="email" class="txt" value="${user.email}" /></div>
                         </li>
                         <li class="clearfix">
                             <div class="info-l">上传头像：</div>

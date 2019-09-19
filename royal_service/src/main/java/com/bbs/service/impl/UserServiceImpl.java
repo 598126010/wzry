@@ -151,4 +151,9 @@ public class UserServiceImpl implements UserService {
     public Integer getCount(String userName) {
         return userDao.getCount(userName);
     }
+
+    @Override
+    public UserInfo findByUsername(String userName) {
+       return userDao.findUserInfoByUsername(userName);
+    }
 }

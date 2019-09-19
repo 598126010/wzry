@@ -179,17 +179,17 @@
                 </div>
             </div>
             <ul class="pagination" >
-                <li><a href=href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=1">«</a></li>
+                <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=1">«</a></li>
                 <c:forEach begin="1" end="${pageInfo.pages}" var="i">
                     <c:if test="${pageInfo.pageNum == i}">
-                        <li><a  class="active"  href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${i}">${i}</a></li>
+                        <li><a  class="active"  href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=${i}">${i}</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum != i}">
-                        <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${i}">${i}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=${i}">${i}</a></li>
                     </c:if>
 
                 </c:forEach>
-                <li><a href=href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${pageInfo.pageNum}">»</a></li>
+                <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=${pageInfo.pageNum}">»</a></li>
 
 
             </ul>

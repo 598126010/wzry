@@ -26,8 +26,6 @@ public interface ArticleService {
 
     Integer getTodayCount();
 
-    List<Article> findByKeyWord(String keyWord);
-
     boolean submitReport(Report report);
 
     void addUpvoteCount(String articleId);

@@ -148,15 +148,6 @@
                         </div>
                     </li>
                 </c:forEach>
-                <div class="aside l">
-                    <div class="aside-box">
-                        <h3 style="font-size: x-large" align="center">热门帖子排行榜</h3>
-                    </div><br>
-
-
-
-
-                </div>
 
 
                 <!--发表评论-->

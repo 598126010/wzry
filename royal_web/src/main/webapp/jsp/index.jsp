@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>王者荣耀论坛</title>
+    <%--<embed src="/upload/tracks/wangzherongyao.mp3" hidden="true" loop="2" volume="50">--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common-new.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css"/>
@@ -12,6 +13,18 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/hm-bbs.js"></script>
+    <style>
+        #top1 a:hover{
+            color: red;
+        }
+        #top2 a:hover{
+            color: gold;
+        }
+        #top3 a:hover{
+            color: chartreuse;
+        }
+
+    </style>
     <style>
         ul.pagination {
             display: inline-block;
@@ -39,7 +52,6 @@
     </style>
 </head>
 <body>
-
 <!-- 头部 -->
 <jsp:include page="common/header.jsp"/>
 
@@ -161,7 +173,6 @@
 
 
 
-
             <!-- 右侧侧边栏,在线用户 -->
             <div class="aside l">
                 <div class="aside-box">
@@ -171,22 +182,24 @@
                     <ul class="b clearfix">
                         <c:forEach items="${onlineUser}" var="onlineUser">
                             <li>
-                                <div><img src="/${onlineUser.picUrl}" height="55"/> </div>
+                                <div><img src="${onlineUser.picUrl}" height="55"/> </div>
                                 <p>${onlineUser.userName}</p>
                             </li>
                         </c:forEach>
                     </ul>
                 </div>
             </div>
-            <ul class="pagination" >
-                <li><a href=href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=1">«</a></li>
-                <c:forEach begin="1" end="${pageInfo.pages}" var="i">
-                    <c:if test="${pageInfo.pageNum == i}">
-                        <li><a  class="active"  href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${i}">${i}</a></li>
-                    </c:if>
-                    <c:if test="${pageInfo.pageNum != i}">
-                        <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${i}">${i}</a></li>
-                    </c:if>
+            <div class="aside l">
+                <div class="aside-box">
+                    <h3 style="font-size: x-large" align="center">热门帖子排行榜</h3>
+                </div><br>
+
+                <div id="top1" align="center"><a href="/article/findTop1Article.do?articleId=${article.articleId}" style="font-size: larger">👍状元:${article.title}</a></div><br>
+                <div id="top2" align="center"><a href="/article/getArticle.do?articleId=7" style="font-size: larger">👀榜眼:今天天气不错！</a></div><br>
+                <div id="top3" align="center"><a href="/article/getArticle.do?articleId=12" style="font-size: larger">🌸探花:嘻嘻嘻嘻</a></div>
+
+
+            </div>
 
                 </c:forEach>
                 <li><a href=href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${pageInfo.pageNum}">»</a></li>

@@ -4,6 +4,7 @@ import com.bbs.domain.*;
 import com.bbs.service.ArticleService;
 import com.bbs.service.WordService;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -185,6 +188,34 @@ public class ArticleController {
 //        mv.setViewName("redirect:getArticle.do?articleId="+report.getArticleId());
         return new ResultInfo("",result);
 //        return "redirect:getArticle.do?articleId="+report.getArticleId();
+    }
+
+
+    //关键字搜索
+    @RequestMapping("findByKeyWord")
+    public ModelAndView findByKeyWord(String keyWord) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        if(keyWord!=null){
+            keyWord=new String(keyWord.getBytes("iso8859-1"),"utf-8");
+        }
+        List<Article> articleList =  articleService.findByKeyWord(keyWord);
+        mv.addObject("articleList",articleList);
+        mv.setViewName("index");
+        return mv;
+    }
+    //点击获取热度第一的帖子
+    @RequestMapping("findTop1Article")
+    public ModelAndView findTop1Article(@RequestParam(name = "articleId",required = true)Integer articleId){
+        ModelAndView mv = new ModelAndView();
+        Article article = null;
+        try {
+            article = articleService.findTop1Article(articleId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.addObject("article",article);
+        mv.setViewName("getArticle");
+        return mv;
     }
 
 }

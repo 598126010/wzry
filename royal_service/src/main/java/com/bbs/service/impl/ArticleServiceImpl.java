@@ -100,6 +100,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
+    //点击获取热度第一的帖子
+    @Override
+    public Article findTop1Article(Integer articleId) {
+         return articleDao.findTop1Article(articleId);
+    }
+
+    //关键字搜索
     @Override
     public void addUpvoteCount(String articleId) {
         articleDao.addUpvoteCount(articleId);

@@ -114,7 +114,7 @@
             <div class="list-view l">
                 <ul>
                     <c:forEach items="${pageInfo.list}" var="list">
-                        <c:if test="${list.isTop == 1}">
+                        <c:if test="${list.isTop == 1 && list.isReport != 2}">
                             <li class="clearfix ding">
                                 <div class="hm-index-title">
                                     <i class="set-to-top">顶</i> <a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>
@@ -131,7 +131,7 @@
                                 </div>
                             </li>
                         </c:if>
-                        <c:if test="${list.isTop == 0}">
+                        <c:if test="${list.isTop == 0 && list.isReport != 2}">
                         <li class="clearfix">
                         <div class="hm-index-title">
                         <i class="set-to-top"></i><a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>

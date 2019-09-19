@@ -4,18 +4,14 @@ import com.bbs.domain.*;
 import com.bbs.service.ArticleService;
 import com.bbs.service.WordService;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -192,6 +188,8 @@ public class ArticleController {
     public ResultInfo report(@RequestBody Report report){
         System.out.println(report);
         report.setReportStatus(1);
+        Integer articleId = report.getArticleId();
+        articleService.changeIsreportByArticle(articleId);
         boolean result = articleService.submitReport(report);
 //        mv.setViewName("redirect:getArticle.do?articleId="+report.getArticleId());
         return new ResultInfo("",result);

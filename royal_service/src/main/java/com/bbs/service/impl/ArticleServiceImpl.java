@@ -138,6 +138,11 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.findByKeyWord(keyWord);
     }
 
+    @Override
+    public void changeIsreportByArticle(Integer articleId) {
+        articleDao.changeIsreportByArticle(articleId);
+    }
+
     //全部帖子统计
     @Override
     public Integer getTotalCount() {

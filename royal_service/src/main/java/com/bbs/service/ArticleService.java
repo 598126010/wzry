@@ -25,7 +25,6 @@ public interface ArticleService {
     Integer getTotalCount();
 
     Integer getTodayCount();
-
     boolean submitReport(Report report);
 
     void addUpvoteCount(String articleId);
@@ -36,5 +35,7 @@ public interface ArticleService {
 
     List<Zone> findAllZone();
     List<Article> findByKeyWord(String keyWord, int pageNum, int pageSize);
+
+    void changeIsreportByArticle(Integer articleId);
     List<Article> findTop1Article();
 }

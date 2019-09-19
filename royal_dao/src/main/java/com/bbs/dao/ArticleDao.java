@@ -2,9 +2,6 @@ package com.bbs.dao;
 
 import com.bbs.domain.*;
 import org.apache.ibatis.annotations.*;
-import com.bbs.domain.*;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -103,6 +100,9 @@ public interface ArticleDao {
     //关键字搜索
     @Select("select * from bbs_article_table where title like concat('%',#{keyWord},'%') or content like concat('%',#{keyWord},'%')")
     List<Article> findByKeyWord(String keyWord);
+    //跟新举报状态
+    @Update("update bbs_article_table set isReport = 1 where articleId = #{articleId}")
+    void changeIsreportByArticle(Integer articleId);
 
     @Insert("insert into bbs_report_table(reportContent,reportUserName,reportStatus,articleId) values(#{reportContent},#{reportUserName},#{reportStatus},#{articleId})")
     int submitReport(Report report);

@@ -23,10 +23,10 @@
                 <li role="presentation"><a href="${pageContext.request.contextPath}/article/findByPage.do?page=1&size=6" >帖子信息</a></li>
             </ul>
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="/word/findByPage.do" >敏感词汇管理</a></li>
+                <li role="presentation"><a href="/article/SensitiveWordsPage.do" >敏感词汇管理</a></li>
             </ul>
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="/report/findByPage.do" >审批举报</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/article/reportPage.do?page=1&size=6" >审批举报</a></li>
             </ul>
         </li>
     </ul>

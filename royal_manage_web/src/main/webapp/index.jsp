@@ -11,7 +11,12 @@
     <title>Title</title>
 </head>
 <body>
-<td><a href="/article/findByPage.do">main</a></td>
+<a href="${pageContext.request.contextPath}/article/findByPage.do">main</a>
+<script>
+    <%--$(function () {--%>
+        <%--location.href="${pageContext.request.contextPath}/jsp/login.jsp"--%>
+    <%--})--%>
+</script>
 
 </body>
 </html>

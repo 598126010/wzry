@@ -3,6 +3,7 @@ package com.bbs.service.impl;
 import com.bbs.dao.ArticleDao;
 import com.bbs.domain.*;
 import com.bbs.service.ArticleService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +27,13 @@ public class ArticleServiceImpl implements ArticleService {
     /**
      * 根据zoneId获取article集合
      * @param id
+     * @param pageSize
+     * @param pageNum
      * @return
      */
     @Override
-    public List<Article> findArticleListByZoneId(int id) {
+    public List<Article> findArticleListByZoneId(int id, int pageSize, int pageNum) {
+        PageHelper.startPage(pageNum,pageSize);
         return  articleDao.findArticleListByZoneId(id);
     }
 

@@ -101,7 +101,7 @@
             <!-- 左侧列表 -->
             <div class="list-view l">
                 <ul>
-                    <c:forEach items="${articleList}" var="list">
+                    <c:forEach items="${pageInfo.list}" var="list">
                         <c:if test="${list.isTop == 1}">
                             <li class="clearfix ding">
                                 <div class="hm-index-title">
@@ -119,25 +119,41 @@
                                 </div>
                             </li>
                         </c:if>
-                    </c:forEach>
-                        <c:forEach items="${articleList}" var="list">
-                       <c:if test="${list.isTop == 0}">
+                        <c:if test="${list.isTop == 0}">
                         <li class="clearfix">
-                            <div class="hm-index-title">
-                                <i class="set-to-top"></i><a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>
-                            </div>
-                            <div class="hm-index-con">${list.content}</div>
-                            <div class="hm-index-info l">
-                                <span class="article-username">${list.senderName}</span><span class="post-time">${list.sendTime}</span>
-                            </div>
-                            <div class="hm-index-fun r">
-                                <span class="icon-like"><i></i>${list.upvoteCount}</span>
-                                <span class="icon-talk"><i></i><c:if test="${list.replyCount == null}">0</c:if>
-                                    <c:if test="${list.replyCount != null}">${list.replyCount}</c:if>
-                                </span>
-                            </div>
-                            </c:if>
+                        <div class="hm-index-title">
+                        <i class="set-to-top"></i><a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>
+                        </div>
+                        <div class="hm-index-con">${list.content}</div>
+                        <div class="hm-index-info l">
+                        <span class="article-username">${list.senderName}</span><span class="post-time">${list.sendTime}</span>
+                        </div>
+                        <div class="hm-index-fun r">
+                        <span class="icon-like"><i></i>${list.upvoteCount}</span>
+                        <span class="icon-talk"><i></i><c:if test="${list.replyCount == null}">0</c:if>
+                        <c:if test="${list.replyCount != null}">${list.replyCount}</c:if>
+                        </span>
+                        </div>
+                        </c:if>
                     </c:forEach>
+                        <%--<c:forEach items="${pageInfo.list}" var="list">--%>
+                       <%--<c:if test="${list.isTop == 0}">--%>
+                        <%--<li class="clearfix">--%>
+                            <%--<div class="hm-index-title">--%>
+                                <%--<i class="set-to-top"></i><a href="${pageContext.request.contextPath}getArticle.do?articleId=${list.articleId}">${list.title}</a>--%>
+                            <%--</div>--%>
+                            <%--<div class="hm-index-con">${list.content}</div>--%>
+                            <%--<div class="hm-index-info l">--%>
+                                <%--<span class="article-username">${list.senderName}</span><span class="post-time">${list.sendTime}</span>--%>
+                            <%--</div>--%>
+                            <%--<div class="hm-index-fun r">--%>
+                                <%--<span class="icon-like"><i></i>${list.upvoteCount}</span>--%>
+                                <%--<span class="icon-talk"><i></i><c:if test="${list.replyCount == null}">0</c:if>--%>
+                                    <%--<c:if test="${list.replyCount != null}">${list.replyCount}</c:if>--%>
+                                <%--</span>--%>
+                            <%--</div>--%>
+                            <%--</c:if>--%>
+                    <%--</c:forEach>--%>
 
                     </li>
                 </ul>
@@ -163,15 +179,19 @@
                 </div>
             </div>
             <ul class="pagination" >
-                <li><a href="#">«</a></li>
-                <li><a href="#">1</a></li>
-                <li><a class="active" href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="#">»</a></li>
+                <li><a href=href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=1">«</a></li>
+                <c:forEach begin="1" end="${pageInfo.pages}" var="i">
+                    <c:if test="${pageInfo.pageNum == i}">
+                        <li><a  class="active"  href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${i}">${i}</a></li>
+                    </c:if>
+                    <c:if test="${pageInfo.pageNum != i}">
+                        <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${i}">${i}</a></li>
+                    </c:if>
+
+                </c:forEach>
+                <li><a href=href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=${pageInfo.size}&pageNum=${pageInfo.pageNum}">»</a></li>
+
+
             </ul>
         </div>
     </div>

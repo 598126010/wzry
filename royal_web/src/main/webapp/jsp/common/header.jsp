@@ -123,14 +123,20 @@
             }
         })
         $("#userExist").click(function () {
-            if(${user != null}){
-                $.post("${pageContext.request.contextPath}/user/userExist.do",{},function () {
+            var flag = confirm("退出成成功,是否返回首页");
 
+            if (${user != null}) {
+                if (flag) {
+                    $.post("${pageContext.request.contextPath}/user/userExist.do")
+                    location.href = "${pageContext.request.contextPath}/index.jsp"
+                } else {
+                    $.post("${pageContext.request.contextPath}/user/userExist.do", function () {
                         location.reload();
-                },"json")
-            }else {
+                    })
+                }
+            } else {
                 alert("登录超时")
-                <%--location.href = "${pageContext.request.contextPath}/index.jsp"--%>
+                location.href = "${pageContext.request.contextPath}/index.jsp"
             }
         })
         //调用方法校验用户名及密码

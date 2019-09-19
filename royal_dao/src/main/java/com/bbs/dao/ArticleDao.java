@@ -14,7 +14,7 @@ public interface ArticleDao {
     @Insert("insert into bbs_comment_table(commentContent,commentUserName,articleId) values(#{commentContent},#{commentUserName},#{articleId})")
     void saveComment(Comment comment);
 
-    @Select("select * from bbs_article_table where zoneId = #{id}")
+    @Select("select * from bbs_article_table where zoneId = #{id} order by istop desc")
     @Results({
             @Result(id=true,property = "articleId",column = "articleId"),
             @Result(property = "title",column = "title"),

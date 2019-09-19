@@ -10,7 +10,7 @@ public interface ArticleService {
 
     void saveComment(Comment comment);
 
-    List<Article> findArticleListByZoneId(int id);
+    List<Article> findArticleListByZoneId(int id, int pageSize, int pageNum);
 
     List<Comment> getArticleByArticleId(int id);
 

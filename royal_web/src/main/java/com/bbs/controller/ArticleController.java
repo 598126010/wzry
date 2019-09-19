@@ -3,6 +3,7 @@ package com.bbs.controller;
 import com.bbs.domain.*;
 import com.bbs.service.ArticleService;
 import com.bbs.service.WordService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,9 +49,9 @@ public class ArticleController {
      * 展示不同讨论区的帖子信息
      */
     @RequestMapping("/findArticleListByZoneId.do")
-    public ModelAndView findArticleListByZoneId(ModelAndView mv, @RequestParam(name = "zoneId", required = true, defaultValue = "1") int id) {
+    public ModelAndView findArticleListByZoneId(ModelAndView mv, @RequestParam(name = "zoneId", required = true, defaultValue = "1") int id,@RequestParam(name = "pageSize",required = true,defaultValue = "6") int pageSize,@RequestParam(name = "pageNum",required = true,defaultValue = "1")int pageNum) {
         //根据获取的交流区Id查询帖子集合
-        List<Article> list = articleService.findArticleListByZoneId(id);
+        List<Article> list = articleService.findArticleListByZoneId(id,pageSize,pageNum);
         //获取交流区集合
         List<Zone> zoneList = articleService.findAllZone();
         //获取敏感词集合
@@ -80,10 +81,10 @@ public class ArticleController {
 
         //显示在线用户
         List<UserInfo> onlineUsers = articleService.findOnlineUser();
-
+        PageInfo pageInfo = new PageInfo(list);
         mv.addObject("onlineUser", onlineUsers);
         mv.addObject("zoneList", zoneList);
-        mv.addObject("articleList", list);
+        mv.addObject("pageInfo", pageInfo);
         mv.addObject("zoneId", id);
         mv.setViewName("/index");
         return mv;
@@ -185,6 +186,5 @@ public class ArticleController {
         return new ResultInfo("",result);
 //        return "redirect:getArticle.do?articleId="+report.getArticleId();
     }
-    //获取交流区信息
 
 }

@@ -30,21 +30,6 @@
             //用来判断邮箱是否存在的标记;
             var flag = true;
 
-            $("#changeUserInfo").click(function () {
-
-                var file=$("#file").val();
-                var filename=file.replace(/.*(\/|\\)/, "");
-                var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
-                if(fileExt == "jpg" || fileExt == "png" || fileExt == "bmp"){
-                    if(flag || $("#file").val() != ""){
-                        $("#uploadForm").submit();
-                    }
-                }else{
-                    alert("文件格式不对");
-                }
-
-            });
-
             //校验邮箱格式
             function checkEmail() {
                 var email = $("#email").val();
@@ -54,6 +39,7 @@
                     return true;
                 }else{
                     flag = false;
+                    $("#checkUserInfo").html("<font color='red'/>邮箱格式不正确</font>");
                     return false;
                 }
             }
@@ -66,9 +52,9 @@
                         dataType:"text",
                         data:{"userId":$("#userId").val(),"email":$("#email").val()},
                         success:function (data) {
-                            if(data == "error"){
+                            if(data == "error" && $("#email").val() != "${user.email}"){
                                 $("#checkUserInfo").html("");
-                                $("#checkUserInfo").html("<font color='red'/>邮箱已存在</font>");
+                                $("#checkUserInfo").html("<font color='red'/>邮箱已存在,请修改邮箱</font>");
                                 flag = false;
                             }else{
                                 $("#checkUserInfo").html("");
@@ -77,6 +63,21 @@
                         }
                     })
                 }
+            });
+            $("#changeUserInfo").click(function () {
+
+                var file=$("#file").val();
+                var filename=file.replace(/.*(\/|\\)/, "");
+                var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
+                if(fileExt == "jpg" || fileExt == "png" || fileExt == "bmp" || file==""){
+                   // alert(flag)
+                    if(flag || $("#file").val() != ""){
+                        $("#uploadForm").submit();
+                    }
+                }else{
+                    alert("上传图;片文件格式不对");
+                }
+
             })
         })
     </script>

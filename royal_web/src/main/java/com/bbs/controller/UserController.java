@@ -104,23 +104,24 @@ public class UserController {
             file.mkdirs();
         }
 
-        String filename = upload.getOriginalFilename();
-        if(filename == null || "".equals(filename)){
-            UserInfo user = new UserInfo();
-            user.setUserId(userId);
-            UserInfo u = userService.findUserInfo(user);
-            request.getSession().setAttribute("user",u);
-            return "userInfo";
+        if (upload!=null) {
+            String filename = upload.getOriginalFilename();
+            if (filename == null || "".equals(filename)) {
+                UserInfo user = new UserInfo();
+                user.setUserId(userId);
+                UserInfo u = userService.findUserInfo(user);
+                request.getSession().setAttribute("user", u);
+                return "userInfo";
+            }
+
+            String uuid = UUID.randomUUID().toString().replace("-", "");
+            int i = filename.lastIndexOf(".");
+            filename = filename.substring(i);
+            filename = uuid + filename;
+            upload.transferTo(new File(path, filename));
+            String saveName = "uploads/" + filename;
+            userService.updateUserPicture(userId, saveName);
         }
-
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        int i = filename.lastIndexOf(".");
-        filename = filename.substring(i);
-        filename = uuid+filename;
-        upload.transferTo(new File(path,filename));
-        String saveName = "uploads/"+filename;
-        userService.updateUserPicture(userId,saveName);
-
         UserInfo user = new UserInfo();
         user.setUserId(userId);
         UserInfo u = userService.findUserInfo(user);
@@ -178,7 +179,7 @@ public class UserController {
         request.getSession().removeAttribute("user");
         request.getSession().setAttribute("user",user1);
         mv.addObject("user",user1);
-        mv.setViewName("userInfo");
+        mv.setViewName("redirect:/jsp/userInfo.jsp");
         return mv;
     }
 

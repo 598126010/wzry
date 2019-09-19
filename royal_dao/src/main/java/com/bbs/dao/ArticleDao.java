@@ -86,6 +86,7 @@ public interface ArticleDao {
     @Select("select count(1) from bbs_article_table;")
     Integer getTotalCount();
 
+
     @Update("update bbs_article_table set upvoteCount = upvoteCount+1 where articleId=#{articleId}")
     void addUpvoteCount(String articleId);
 

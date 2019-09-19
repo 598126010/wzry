@@ -37,7 +37,6 @@ public class ArticleServiceImpl implements ArticleService {
         return  articleDao.findArticleListByZoneId(id);
     }
 
-
     /**
      * 根据ArticleId获取评论信息
      * @param id
@@ -134,7 +133,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     //关键字搜索
     @Override
-    public List<Article> findByKeyWord(String keyWord) {
+    public List<Article> findByKeyWord(String keyWord, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         return articleDao.findByKeyWord(keyWord);
     }
 

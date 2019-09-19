@@ -189,25 +189,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="aside l">
-                <div class="aside-box">
-                    <h3 style="font-size: x-large" align="center">热门帖子排行榜</h3>
-                </div><br>
 
-                <c:forEach items="${topArticle}" var="article" varStatus="i">
-                    <c:if test="${i.index == 0}">
-                        <div id="top1" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
-                    </c:if>
-                    <c:if test="${i.index == 1}">
-                        <div id="top2" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
-                    </c:if>
-                    <c:if test="${i.index == 2}">
-                        <div id="top3" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
-                    </c:if>
-                </c:forEach>
-
-
-            </div>
             <ul class="pagination" >
                 <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=1">«</a></li>
                 <c:forEach begin="1" end="${pageInfo.pages}" var="i">
@@ -239,9 +221,28 @@
 
 <!-- 右边发帖，回顶部 -->
 <div class="fixedBar" id="j_fixedBar">
-    <a id="newTopicBtn" href="javascript:;" class="newTopic"><span></span>发帖</a>
-    <a href="#" class="goTop"><i></i><span>返回<br/>顶部</span></a>
+    <div class="aside l">
+        <div class="aside-box">
+            <h1 style="font-size: x-large" align="center">热门帖子排行榜</h1>
+        </div><br>
+        <c:forEach items="${topArticle}" var="article" varStatus="i">
+            <c:if test="${i.index == 0}">
+                <div id="top1" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
+            </c:if>
+            <c:if test="${i.index == 1}">
+                <div id="top2" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
+            </c:if>
+            <c:if test="${i.index == 2}">
+                <div id="top3" align="center"><a href="/article/getArticle.do?articleId=${article.articleId}" style="font-size: larger">👍${i.index+1}:${article.title}</a></div><br>
+            </c:if>
+        </c:forEach>
+        <a id="newTopicBtn" href="javascript:;" class="newTopic"><span></span>发帖</a>
+        <a href="#" class="goTop"><i></i><span>返回<br/>顶部</span></a>
+    </div>
 </div>
+<%--<div class="fixedBar" id="j_fixedBar">--%>
+    <%----%>
+<%--</div>--%>
 
 <!-- 发帖弹出框 -->
 <form action="${pageContext.request.contextPath}/article/createNewArticle.do?" method="post" id="reportArticle">

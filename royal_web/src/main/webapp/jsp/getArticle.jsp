@@ -104,8 +104,8 @@
                         </div>
                         <span class="icon-comment">
                         <a href="javascript:;" onclick="upvote(${article.articleId})"> <i id="id1"></i> 点赞</a>
-                        <a href="#" id="report" articleId = "${article.articleId}"><i></i>举报</a>
-                        <a href="#comment"> <i></i> 评论</a>
+                        <a href="#comment"> <i id="id3"></i> 评论</a>
+                            <a href="#" id="report" articleId = "${article.articleId}"><i id="id2"></i>举报</a>
                         </span>
                     </div>
                 </li>

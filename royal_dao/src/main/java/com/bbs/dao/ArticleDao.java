@@ -98,4 +98,7 @@ public interface ArticleDao {
     Integer findRepleyCountByArticleId(Integer articleId);
     @Select("select * from bbs_zone_table")
     List<Zone> findAllZone();
+    //查询关键字
+    @Select("select * from bbs_article_table where title like concat('%',#{keyWord},'%') or content like concat('%',#{keyWord},'%')")
+    List<Article> findByKeyWord(String keyWord);
 }

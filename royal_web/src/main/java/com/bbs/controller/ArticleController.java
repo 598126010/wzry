@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -66,6 +67,7 @@ public class ArticleController {
                         String content = article.getContent();
                         String keyWord = word.getWord();
                         content = content.replace(content.substring(content.indexOf(keyWord), content.indexOf(keyWord) + keyWord.length()), "***");
+                        article.setContent(content);
                     }
                     //过滤标题
                     if (article.getTitle().contains(word.getWord())) {
@@ -186,5 +188,17 @@ public class ArticleController {
         return new ResultInfo("",result);
 //        return "redirect:getArticle.do?articleId="+report.getArticleId();
     }
-
+    //关键字查询
+    @RequestMapping("/findByKeyWord")
+    public ModelAndView findByKeyWord (@RequestParam(name = "keyWord")String keyWord,@RequestParam(name = "pageSize",required = true,defaultValue = "6") int pageSize,@RequestParam(name = "pageNum",required = true,defaultValue = "1")int pageNum) throws UnsupportedEncodingException {
+        ModelAndView mv = new ModelAndView();
+        if(keyWord!=null){
+            keyWord=new String(keyWord.getBytes("iso8859-1"),"utf-8");
+        }
+        List<Article> articleList = articleService.findByKeyWord(keyWord,pageNum,pageSize);
+        PageInfo pageInfo = new PageInfo(articleList);
+        mv.addObject("pageInfo",pageInfo);
+        mv.setViewName("index");
+        return mv;
+    }
 }

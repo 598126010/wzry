@@ -34,4 +34,5 @@ public interface ArticleService {
     Integer findUpvoteCount(String articleId);
 
     List<Zone> findAllZone();
+    List<Article> findByKeyWord(String keyWord, int pageNum, int pageSize);
 }

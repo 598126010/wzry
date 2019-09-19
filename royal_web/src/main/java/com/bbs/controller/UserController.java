@@ -65,7 +65,7 @@ public class UserController {
      * @throws IOException
      */
     @RequestMapping("/userExist.do")
-    public void userExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String userExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String requestURI = request.getRequestURI();
         System.out.println(requestURI);
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
@@ -73,6 +73,7 @@ public class UserController {
             userService.updateLoginStatus(userInfo.getUserId(), 0);
             request.getSession().removeAttribute("user");
         }
+        return "redirect:/index.jsp";
     }
 
     //跳转登入

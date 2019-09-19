@@ -189,7 +189,7 @@
                     </c:if>
 
                 </c:forEach>
-                <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=${pageInfo.pageNum}">»</a></li>
+                <li><a href="${pageContext.request.contextPath}/article/findArticleListByZoneId.do?pageSize=6&pageNum=${pageInfo.pages}">»</a></li>
 
 
             </ul>

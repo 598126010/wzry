@@ -124,11 +124,12 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.findAllZone();
     }
 
-//    //关键字搜索
-//    @Override
-//    public List<Article> findByKeyWord(String keyWord) {
-//        return articleDao.findByKeyWord(keyWord);
-//    }
+    //关键字搜索
+    @Override
+    public List<Article> findByKeyWord(String keyWord, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return articleDao.findByKeyWord(keyWord);
+    }
 
     //全部帖子统计
     @Override

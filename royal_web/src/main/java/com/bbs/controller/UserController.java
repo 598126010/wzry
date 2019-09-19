@@ -66,6 +66,8 @@ public class UserController {
      */
     @RequestMapping("/userExist.do")
     public void userExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String requestURI = request.getRequestURI();
+        System.out.println(requestURI);
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
         if (userInfo != null) {
             userService.updateLoginStatus(userInfo.getUserId(), 0);
@@ -169,6 +171,7 @@ public class UserController {
         UserInfo user = (UserInfo) request.getSession().getAttribute("user");
         if(user == null){
             mv.setViewName("redirect:/index.jsp");
+            return mv;
         }
         UserInfo user1 = userService.findByUsername(user.getUserName());
         request.getSession().removeAttribute("user");

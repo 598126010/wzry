@@ -48,7 +48,7 @@
                 <!-- Table -->
                 <div>
                     <div style="float: left">
-                        <form method="get" id="articleSearchForm">
+                        <form method="post" id="articleSearchForm" action="${pageContext.request.contextPath}/article/findByPage.do">
                             <table>
                                 <tr>
                                     <th>
@@ -60,14 +60,14 @@
                                         <input type="hidden" id="pageNum" name="pn" value="">
                                     </th>
                                     <th>
-                                        <label for="article_sendername" class="control-label">创帖人:</label>
+                                        <label for="article_senderName" class="control-label">创帖人:</label>
                                     </th>
                                     <th>
-                                        <input type="text" id="article_sendername" class="form-control"
-                                               name="sendername" value="">
+                                        <input type="text" id="article_senderName" class="form-control"
+                                               name="senderName" value="">
                                     </th>
                                     <th colspan="2">
-                                        <input type="button" value="查询" class="form-control btn-primary">
+                                        <input type="submit" value="查询" class="form-control btn-primary">
                                     </th>
                                 </tr>
                             </table>
@@ -104,12 +104,12 @@
                                 <td width="5%">${article.zone.zoneName}</td>
 
                                 <td width="15%">
-                                    <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&pn=${articleMsgs.pageNum}&status=1" role="button" class="btn btn-primary">屏蔽</a>
-                                    <c:if test="${article.isTop==0}">
-                                        <a href="${pageContext.request.contextPath}/article/srtTop.do?id=${article.articleId}&pn=${articleMsgs.pageNum}&status=1" role="button" class="btn btn-danger" >置顶</a>
+                                    <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=2" role="button" class="btn btn-primary">屏蔽</a>
+                                    <c:if test="${article.isReport==0||article.isReport==1}">
+                                        <a href="${pageContext.request.contextPath}/article/setTop.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=1" role="button" class="btn btn-danger" >置顶</a>
                                     </c:if>
-                                    <c:if test="${article.isTop==1}">
-                                        <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&pn=${articleMsgs.pageNum}&status=0" role="button" class="btn btn-info" >取消</a>
+                                    <c:if test="${article.isReport==2}">
+                                        <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=0" role="button" class="btn btn-info" >取消</a>
                                     </c:if>
                                 </td>
                             </tr>
@@ -173,5 +173,6 @@
 
 <%--<%@ include file="ArticleAdd.jsp"%>--%>
 <%@ include file="ArticleUpdate.jsp"%>
+
 </body>
 </html>

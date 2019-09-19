@@ -8,8 +8,8 @@ package com.bbs.domain;
 public class Word {
 
     private Integer wordId;
-    private Integer status;//敏感词
-    private String word;//是否启用
+    private Integer status;//是否启用
+    private String word;//敏感词
 
     public Integer getWordId() {
         return wordId;

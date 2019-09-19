@@ -63,15 +63,16 @@ public class ArticleController {
                         String content = article.getContent();
                         System.out.println(content);
                         String keyWord = word.getWord();
-                        content = content.replace(content.substring(content.indexOf(keyWord), keyWord.indexOf(content) + keyWord.length()), "***");
+                        content = content.replace(content.substring(content.indexOf(keyWord), content.indexOf(keyWord) + keyWord.length()), "***");
                         System.out.println(content);
                         article.setContent(content);
+
                     }
                     //过滤标题
                     if (article.getTitle().contains(word.getWord())) {
                         String title = article.getTitle();
                         String keyWord = word.getWord();
-                        title = title.replace(title.substring(title.indexOf(keyWord), keyWord.indexOf(title) + keyWord.length()), "***");
+                        title = title.replace(title.substring(title.indexOf(keyWord), title.indexOf(keyWord) + keyWord.length()), "***");
                         article.setTitle(title);
                     }
                 }
@@ -114,8 +115,9 @@ public class ArticleController {
                     if (comment.getCommentContent().contains(word.getWord())) {
                         String content = comment.getCommentContent();
                         String keyWord = word.getWord();
-                        content = content.replace(content.substring(content.indexOf(keyWord), keyWord.indexOf(content) + keyWord.length()), "***");
+                        content = content.replace(content.substring(content.indexOf(keyWord), content.indexOf(keyWord) + keyWord.length()), "***");
                         comment.setCommentContent(content);
+                        continue;
                     }
                     List<Reply> replies = comment.getReplies();
                     //过滤回复
@@ -124,8 +126,9 @@ public class ArticleController {
                                 //获取回复信息
                                 String content = reply.getReplyContent();
                                 String keyWord = word.getWord();
-                                content = content.replace(content.substring(content.indexOf(keyWord), keyWord.indexOf(content) + keyWord.length()), "***");
+                                content = content.replace(content.substring(content.indexOf(keyWord), content.indexOf(keyWord) + keyWord.length()), "***");
                                 reply.setReplyContent(content);
+                                continue;
                             }
                     }
                     //过滤article

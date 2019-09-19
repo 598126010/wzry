@@ -1,9 +1,7 @@
 package com.bbs.dao;
 
 import com.bbs.domain.*;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,15 +15,57 @@ public interface ArticleDao {
     void saveComment(Comment comment);
 
     @Select("select * from bbs_article_table where zoneId = #{id}")
+    @Results({
+            @Result(id=true,property = "articleId",column = "articleId"),
+            @Result(property = "title",column = "title"),
+            @Result(property = "content",column = "content"),
+            @Result(property = "sendTime",column = "sendTime"),
+            @Result(property = "senderName",column = "senderName"),
+            @Result(property = "isTop",column = "isTop"),
+            @Result(property = "replyCount",column = "ArticleId",javaType = Integer.class,
+                    one = @One(select = "com.bbs.dao.ArticleDao.findRepleyCountByArticleId")),
+            @Result(property = "upvoteCount",column = "upvoteCount"),
+            @Result(property = "browseCount",column = "browseCount"),
+            @Result(property = "zone",column = "zoneId",javaType = Article.class,one = @One(select = "com.bbs.dao.manager_ZoneDao.findById")),
+            @Result(property = "isReport",column = "isReport"),
+            @Result(property = "userInfo",column = "senderName",javaType = UserInfo.class,
+                    one = @One(select = "com.bbs.dao.UserDao.findUserInfoByUsername"))
+    })
     List<Article> findArticleListByZoneId(int id);
 
     @Select("select * from bbs_comment_table where articleId=#{id}")
+    @Results({
+            @Result(id=true,property = "commentId",column = "commentId"),
+            @Result(property = "commentContent",column = "commentContent"),
+            @Result(property = "commentTime",column = "commentTime"),
+            @Result(property = "commentUserName",column = "commentUserName"),
+            @Result(property = "commentStatus",column = "commentStatus"),
+            @Result(property = "articleId",column = "articleId"),
+            @Result(property = "userInfo",column = "commentUserName",javaType = UserInfo.class,
+                    one = @One(select = "com.bbs.dao.UserDao.findUserInfoByUsername")),
+    })
     List<Comment> getArticleByArticleId(int id);
 
     @Insert("insert into bbs_article_table(title,content,senderName,zoneId) values(#{title},#{content},#{senderName},#{zoneId})")
     void createNewArticle(Article article);
 
     @Select("select * from  bbs_article_table where articleId = #{id}")
+    @Results({
+            @Result(id=true,property = "articleId",column = "articleId"),
+            @Result(property = "title",column = "title"),
+            @Result(property = "content",column = "content"),
+            @Result(property = "sendTime",column = "sendTime"),
+            @Result(property = "senderName",column = "senderName"),
+            @Result(property = "isTop",column = "isTop"),
+            @Result(property = "replyCount",column = "ArticleId",javaType = Integer.class,
+                    one = @One(select = "com.bbs.dao.ArticleDao.findRepleyCountByArticleId")),
+            @Result(property = "upvoteCount",column = "upvoteCount"),
+            @Result(property = "browseCount",column = "browseCount"),
+            @Result(property = "zone",column = "zoneId",javaType = Article.class,one = @One(select = "com.bbs.dao.manager_ZoneDao.findById")),
+            @Result(property = "isReport",column = "isReport"),
+            @Result(property = "userInfo",column = "senderName",javaType = UserInfo.class,
+                    one = @One(select = "com.bbs.dao.UserDao.findUserInfoByUsername"))
+    })
     Article findArticleByArticleId(int id);
 
     @Select("select * from bbs_reply_table where commentId = #{commentId}")
@@ -53,4 +93,7 @@ public interface ArticleDao {
 
     @Select("select upvoteCount from bbs_article_table where articleId = #{articleId}")
     Integer findUpvoteCount(String articleId);
+    //统计回帖人数
+    @Select("SELECT COUNT(*) FROM bbs_comment_table GROUP BY articleId  HAVING articleId =#{articleId}")
+    Integer findRepleyCountByArticleId(Integer articleId);
 }

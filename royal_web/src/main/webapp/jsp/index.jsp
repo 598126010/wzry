@@ -88,7 +88,8 @@
                                 </div>
                                 <div class="hm-index-fun r">
                                     <span class="icon-like"><i></i>${list.upvoteCount}</span>
-                                    <span class="icon-talk"><i></i>${list.replyCount}</span>
+                                    <span class="icon-talk"><i></i><c:if test="${list.replyCount == null}">0</c:if>
+                                    <c:if test="${list.replyCount != null}">${list.replyCount}</c:if></span>
                                 </div>
                             </li>
                         </c:if>
@@ -105,9 +106,11 @@
                             </div>
                             <div class="hm-index-fun r">
                                 <span class="icon-like"><i></i>${list.upvoteCount}</span>
-                                <span class="icon-talk"><i></i>${list.replyCount}</span>
+                                <span class="icon-talk"><i></i><c:if test="${list.replyCount == null}">0</c:if>
+                                    <c:if test="${list.replyCount != null}">${list.replyCount}</c:if>
+                                </span>
                             </div>
-                       </c:if>
+                            </c:if>
                     </c:forEach>
 
                     </li>

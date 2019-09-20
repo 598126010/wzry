@@ -66,8 +66,6 @@ public class UserController {
      */
     @RequestMapping("/userExist.do")
     public String userExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String requestURI = request.getRequestURI();
-        System.out.println(requestURI);
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
         if (userInfo != null) {
             userService.updateLoginStatus(userInfo.getUserId(), 0);

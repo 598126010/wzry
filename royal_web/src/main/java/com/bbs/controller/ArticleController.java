@@ -31,6 +31,8 @@ public class ArticleController {
     @RequestMapping("/reply")
     public String reply(Reply reply, int articleId) {
         articleService.saveReply(reply);
+       Comment comment =  articleService.findCommentByReplyId(reply.getCommentId());
+        articleService.addReplyCount(comment.getArticleId());
         return "redirect:getArticle.do?articleId=" + articleId;
     }
 
@@ -43,6 +45,7 @@ public class ArticleController {
     @RequestMapping("/comment")
     public String comment(Comment comment) {
         articleService.saveComment(comment);
+        articleService.addReplyCount(comment.getArticleId());
         return "redirect:getArticle.do?articleId=" + comment.getArticleId();
     }
 

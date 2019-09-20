@@ -182,7 +182,7 @@
                     <ul class="b clearfix">
                         <c:forEach items="${onlineUser}" var="onlineUser">
                             <li>
-                                <div><img src="${onlineUser.picUrl}" height="55"/> </div>
+                                <div><img src="/${onlineUser.picUrl}" height="55"/> </div>
                                 <p>${onlineUser.userName}</p>
                             </li>
                         </c:forEach>

@@ -41,7 +41,6 @@
                 <div >
                     <ol class="breadcrumb">
                         <li><a href="#">用户管理</a></li>
-                        <li class="active">板块审核</li>
                     </ol>
                 </div>
                 <hr>

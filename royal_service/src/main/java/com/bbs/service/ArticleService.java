@@ -38,4 +38,8 @@ public interface ArticleService {
 
     void changeIsreportByArticle(Integer articleId);
     List<Article> findTop1Article();
+
+    void addReplyCount(Integer articleId);
+
+    Comment findCommentByReplyId(Integer commentId);
 }

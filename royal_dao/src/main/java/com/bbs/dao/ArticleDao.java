@@ -107,7 +107,10 @@ public interface ArticleDao {
     @Insert("insert into bbs_report_table(reportContent,reportUserName,reportStatus,articleId) values(#{reportContent},#{reportUserName},#{reportStatus},#{articleId})")
     int submitReport(Report report);
 
-    @Select("SELECT *  FROM bbs_article_table ORDER BY (replyCount+upvoteCount) DESC LIMIT 0,3")
+    @Select("SELECT *  FROM bbs_article_table ORDER BY (replyCount+upvoteCount) DESC,istop DESC,replyCount DESC LIMIT 0,3")
     List<Article> findTop1Article();
-
+    @Update("update bbs_article_table set replyCount = replyCount +1 where articleId = #{articleId}")
+    void addReportCount(Integer articleId);
+    @Select("SELECT * FROM bbs_comment_table GROUP BY articleId HAVING commentId = #{commentId} ")
+    Comment findCommentByReplyId(Integer commentId);
 }

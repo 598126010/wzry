@@ -106,6 +106,16 @@ public class ArticleServiceImpl implements ArticleService {
          return articleDao.findTop1Article();
     }
 
+    @Override
+    public void addReplyCount(Integer articleId) {
+        articleDao.addReportCount(articleId);
+    }
+
+    @Override
+    public Comment findCommentByReplyId(Integer commentId) {
+        return articleDao.findCommentByReplyId(commentId);
+    }
+
     //关键字搜索
     @Override
     public void addUpvoteCount(String articleId) {

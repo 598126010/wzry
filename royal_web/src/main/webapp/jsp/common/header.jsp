@@ -159,8 +159,11 @@
             }
         })
         $("#userExist").click(function () {
+           var flag2 =  confirm("是否退出当前用户");
+           if(!flag2){
+               return;
+           }else {
             var flag = confirm("退出成功,是否返回首页");
-
             if (${user != null}) {
                 if (flag) {
                     $.post("${pageContext.request.contextPath}/user/userExist.do")
@@ -174,6 +177,7 @@
                 alert("登录超时")
                 <%--location.href = "${pageContext.request.contextPath}/index.jsp"--%>
             }
+           }
         })
         //调用方法校验用户名及密码
         $("#userName").blur(checkUserName);

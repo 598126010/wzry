@@ -71,5 +71,9 @@ public interface manager_ArticleDao {
     //查询相关帖子
     @Select("select * from bbs_article_table where articleId=#{articleId}")
     Article findArticleById(int articleId);
+
+    //删除敏感词
+    @Delete("delete from bbs_word_table where wordId=#{id}")
+    void deleteWord(int id);
 }
 

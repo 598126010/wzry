@@ -40,4 +40,7 @@ public interface manager_ArticleService {
 
     //查询相关帖子
     Article findArticleById(int articleId);
+
+    //删除敏感词
+    void deleteWord(int id);
 }

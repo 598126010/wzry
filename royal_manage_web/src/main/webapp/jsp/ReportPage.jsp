@@ -85,7 +85,7 @@
                                 <%--<c:if test="${article.isTop==0}">--%>
                                     <%--按钮触发静态框--%>
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#article_detail"
-                                            onclick="article_Detail('${report.articleId}')">相关帖子</button>
+                                            onclick="article_Detail(${report.articleId})">相关帖子</button>
                                     <a href="${pageContext.request.contextPath}/article/changeReport.do?id=${report.articleId}&page=${reportMsgs.pageNum}&status=2" role="button" class="btn btn-danger" >屏蔽</a>
                                 <%--</c:if>--%>
                                 <%--<c:if test="${article.isTop==1}">--%>
@@ -154,8 +154,27 @@
 <%--<%@ include file="ArticleAdd.jsp"%>--%>
 <%@ include file="ArticleUpdate.jsp"%>
 </body>
+<%--相关帖子查询的ajax--%>
 <script>
     function article_Detail(articleId) {
+        $.ajax({
+            url:"${pageContext.request.contextPath}/article/findArticleById.do",
+            type:"POST",
+            data:{"articleId":articleId},
+            dataType:"json",
+            success:function (data) {
+                $("#detail_content").val(data.content);
+                $("#detail_title").val(data.title);
+            },
+            error:function () {
+                alert("服务器正忙")
+            },
+        })
+    }
+</script>
+
+<script>
+    function changeReport(articleId) {
         $.ajax({
             url:"${pageContext.request.contextPath}/article/findArticleById.do",
             type:"POST",
@@ -173,4 +192,6 @@
 
     }
 </script>
+
+
 </html>

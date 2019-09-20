@@ -94,4 +94,9 @@ public class manager_ArticleServiceImpl implements manager_ArticleService {
         return manager_articleDao.findArticleById(articleId);
     }
 
+    @Override
+    public void deleteWord(int id) {
+        manager_articleDao.deleteWord(id);
+    }
+
 }

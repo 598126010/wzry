@@ -24,10 +24,13 @@
         function addWord()
         {
             var addword=prompt("请输入需要添加的敏感词");
+            <%--var page=${wordsMsgs.pageNum};--%>
             if (addword!=null)
             {
                 document.form1.addword.value=addword;
+                // document.form1.page.value=page;
                 document.form1.submit();
+
             }
             // window.open('url' ,'_blank','width=400,height=500 menebar=no,toolbar=no');
         }
@@ -98,11 +101,14 @@
 
                             <td width="15%">
                                 <c:if test="${word.status==0}">
-                                    <a href="${pageContext.request.contextPath}/article/wordStatus.do?id=${word.wordId}&pn=${wordsMsgs.pageNum}&page=${wordsMsgs.pageNum}&size=${wordsMsgs.pageSize}&status=1" role="button" class="btn btn-danger" >启用</a>
+                                    <a href="${pageContext.request.contextPath}/article/wordStatus.do?id=${word.wordId}&page=${wordsMsgs.pageNum}&size=${wordsMsgs.pageSize}&status=1" role="button" class="btn btn-danger" >启用</a>
+                                    <%--<a onclick="changeReport(1,${word.wordId},${wordsMsgs.pageNum})" role="button" class="btn btn-danger" >启用</a>--%>
                                 </c:if>
                                 <c:if test="${word.status==1}">
-                                    <a href="${pageContext.request.contextPath}/article/wordStatus.do?id=${word.wordId}&pn=${wordsMsgs.pageNum}&page=${wordsMsgs.pageNum}&size=${wordsMsgs.pageSize}&status=0" role="button" class="btn btn-info" >停用</a>
+                                    <a href="${pageContext.request.contextPath}/article/wordStatus.do?id=${word.wordId}&page=${wordsMsgs.pageNum}&size=${wordsMsgs.pageSize}&status=0" role="button" class="btn btn-info" >停用</a>
+                                    <%--<a onclick="changeReport(0,${word.wordId},${wordsMsgs.pageNum})" role="button" class="btn btn-info" >停用</a>--%>
                                 </c:if>
+                                <a href="${pageContext.request.contextPath}/article/deleteWord.do?id=${word.wordId}&page=${wordsMsgs.pageNum}&size=${wordsMsgs.pageSize}&status=0" role="button" class="btn btn-info" >删除</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -165,6 +171,22 @@
 
 <%--<%@ include file="ArticleAdd.jsp"%>--%>
 <%@ include file="ArticleUpdate.jsp"%>
+<script>
+    function changeReport(status,id,page) {
+        $.ajax({
+            url:"${pageContext.request.contextPath}/article/wordStatus.do",
+            type:"POST",
+            data:{"status":status,"id":id,"page":page},
+            dataType:"json",
+            success:function () {
+                alert("成功")
+            },
+            error:function () {
+                alert("服务器正忙")
+            },
+        })
+    }
+</script>
 
 </body>
 </html>

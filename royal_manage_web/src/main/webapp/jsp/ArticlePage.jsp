@@ -56,7 +56,7 @@
                                     </th>
                                     <th>
                                         <input type="text" id="title" class="form-control"
-                                               name="title" value="">
+                                               name="title" value="${title}">
                                         <input type="hidden" id="pageNum" name="pn" value="">
                                     </th>
                                     <th>
@@ -64,7 +64,7 @@
                                     </th>
                                     <th>
                                         <input type="text" id="article_senderName" class="form-control"
-                                               name="senderName" value="">
+                                               name="senderName" value="${senderName}">
                                     </th>
                                     <th colspan="2">
                                         <input type="submit" value="查询" class="form-control btn-primary">
@@ -131,11 +131,11 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
                             <!--首页-->
-                            <li><a href="${pageContext.request.contextPath}/article/findByPage.do?page=1&size=${articleMsgs.pageSize}" onclick="searchArticle(1)">首页</a></li>
+                            <li><a onclick="searchArticle(1)">首页</a></li>
                             <!--上一页-->
                             <li>
                                 <c:if test="${articleMsgs.hasPreviousPage}">
-                                        <a href="${pageContext.request.contextPath}/article/findByPage.do?page=${articleMsgs.pageNum-1}&size=${articleMsgs.pageSize}" onclick="searchArticle('${articleMsgs.pageNum-1}')" aria-label="Previous">
+                                        <a onclick="searchArticle('${articleMsgs.pageNum-1}')" aria-label="Previous">
                                             <span aria-hidden="true">«</span>
                                         </a>
                                 </c:if>
@@ -143,23 +143,23 @@
 
                             <c:forEach items="${articleMsgs.navigatepageNums}" var="pageNum">
                                 <c:if test="${pageNum == articleMsgs.pageNum}">
-                                    <li class="active"><a href="${pageContext.request.contextPath}/article/findByPage.do?page=${pageNum}&size=${articleMsgs.pageSize}">${pageNum}</a></li>
+                                    <li class="active"><a onclick="searchArticle('${pageNum}')">${pageNum}</a></li>
                                 </c:if>
                                 <c:if test="${pageNum != articleMsgs.pageNum}">
-                                    <li><a href="${pageContext.request.contextPath}/article/findByPage.do?page=${pageNum}&size=${articleMsgs.pageSize}" onclick="searchArticle('${pageNum}')">${pageNum}</a></li>
+                                    <li><a  onclick="searchArticle('${pageNum}')">${pageNum}</a></li>
                                 </c:if>
                             </c:forEach>
 
                             <!--下一页-->
                             <li>
                                 <c:if test="${articleMsgs.hasNextPage}">
-                                    <a href="${pageContext.request.contextPath}/article/findByPage.do?page=${articleMsgs.pageNum+1}&size=${articleMsgs.pageSize}" onclick="searchArticle('${articleMsgs.pageNum+1}')"
+                                    <a onclick="searchArticle('${articleMsgs.pageNum+1}')"
                                        aria-label="Next">
                                         <span aria-hidden="true">»</span>
                                     </a>
                                 </c:if>
                             </li>
-                            <li><a href="${pageContext.request.contextPath}/article/findByPage.do?page=${articleMsgs.pages}&size=${articleMsgs.pageSize}" onclick="searchArticle('${articleMsgs.pages}')">尾页</a></li>
+                            <li><a onclick="searchArticle('${articleMsgs.pages}')">尾页</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -173,6 +173,10 @@
 
 <%--<%@ include file="ArticleAdd.jsp"%>--%>
 <%@ include file="ArticleUpdate.jsp"%>
-
+<script>
+    function searchArticle(pagenum) {
+        location.href="${pageContext.request.contextPath}/article/findByPage.do?page="+pagenum+"&size=${articleMsgs.pageSize}&title=${title}&senderName=${senderName}"
+    }
+</script>
 </body>
 </html>

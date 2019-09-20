@@ -5,6 +5,8 @@ import com.bbs.domain.Report;
 import com.bbs.domain.Word;
 import com.bbs.service.manager_ArticleService;
 import com.github.pagehelper.PageInfo;
+import jdk.nashorn.internal.ir.RuntimeNode;
+import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -22,20 +27,30 @@ public class ArticleController {
     private manager_ArticleService manager_articleService;
 
     //    查询所有帖子并分页+模糊查询
-    @RequestMapping("/findByPage.do")
+    @RequestMapping(value="/findByPage.do")
     public ModelAndView findAll(@RequestParam(name="title",required=true,defaultValue="")String title,
                                 @RequestParam(name="senderName",required=true,defaultValue="")String senderName,
                                 @RequestParam(name="page",required=true,defaultValue="1")int page,
-                                @RequestParam(name="size",required=true,defaultValue ="5")int size){
+                                @RequestParam(name="size",required=true,defaultValue ="5")int size,
+                                HttpServletRequest request){
+
+//        String temp = request.getParameter("title");
+//        if(temp!=null){
+//            try {
+//                title = new String(temp.getBytes("ISO-8859-1"), "UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//        }
         ModelAndView mv = new ModelAndView();
-
         List<Article> articles = manager_articleService.findByPage(title,senderName,page,size);
-
         PageInfo pageInfo = new PageInfo(articles);
 
         mv.addObject("articleMsgs",pageInfo);
-
+        mv.addObject("title",title);
+        mv.addObject("senderName",senderName);
         mv.setViewName("ArticlePage");
+
         return mv;
     }
     //更改帖子屏蔽状态
@@ -111,20 +126,33 @@ public class ArticleController {
 
     //    改变敏感词启用状态
     @RequestMapping("/wordStatus.do")
-    public String changeWordStatus(int page,int id,int status){
+//    @ResponseBody
+    public String changeWordStatus(int page,
+                                   int id,
+                                   int status){
 
         manager_articleService.changeWordStatus(id,status);
 
-        return "redirect:/article/SensitiveWordsPage.do?size=5&page="+page;
+        return "redirect:/article/SensitiveWordsPage.do?page="+page;
     }
 
     //    添加敏感词
     @RequestMapping("/addWords.do")
-    public String addWords(@RequestParam("addword")String word,int lastPage){
+    public String addWords(@RequestParam("addword")String word){
 
         manager_articleService.addWords(word);
 
-        return "redirect:/article/SensitiveWordsPage.do?page="+lastPage;
+        return "redirect:/article/SensitiveWordsPage.do";
+
+    }
+
+    //    删除敏感词
+    @RequestMapping("/deleteWord.do")
+    public String deleteWord(int id,int page){
+
+        manager_articleService.deleteWord(id);
+
+        return "redirect:/article/SensitiveWordsPage.do?page="+page;
     }
 
     //    查询相关帖子
@@ -134,17 +162,5 @@ public class ArticleController {
         Article article=manager_articleService.findArticleById(articleId);
         return article;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

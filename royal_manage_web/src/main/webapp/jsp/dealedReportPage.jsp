@@ -86,8 +86,11 @@
                                     <%--<c:if test="${article.isTop==0}">--%>
                                 <%--<a href="${pageContext.request.contextPath}/article/changeReport.do?id=${report.articleId}&page=${reportMsgs.pageNum}&status=2" role="button" class="btn btn-danger" >屏蔽</a>--%>
                                     <%--</c:if>--%>
-                                    <%--<c:if test="${article.isTop==1}">--%>
-                                <a href="${pageContext.request.contextPath}/article/changeReport.do?id=${report.articleId}&page=${reportMsgs.pageNum}&status=0" role="button" class="btn btn-info" >一键洗白</a>
+                                    <%--<c:if test="${a}==1">--%>
+                                <a href="${pageContext.request.contextPath}/article/changeReport.do?id=${report.articleId}&page=${reportMsgs.pageNum}&status=0" onclick="ganxie()" role="button" class="btn btn-info" >一键洗白</a>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${a}==0">--%>
+                                <%--<a href="${pageContext.request.contextPath}/article/changeReport.do?id=${report.articleId}&page=${reportMsgs.pageNum}&status=0" onclick="ganxie()" role="button" class="btn btn-info" >一键洗白</a>--%>
                                     <%--</c:if>--%>
                             </td>
                         </tr>
@@ -152,4 +155,18 @@
 <%--<%@ include file="ArticleAdd.jsp"%>--%>
 <%@ include file="ArticleUpdate.jsp"%>
 </body>
+<%--<script>--%>
+    <%--function ganxie() {--%>
+        <%--var chongzhi=prompt("请输入充值数额");--%>
+        <%--var a;--%>
+        <%--if (chongzhi!=null&chongzhi>66.6)--%>
+        <%--{--%>
+            <%--alert("感谢充值");--%>
+            <%--a=1;--%>
+        <%--}else{--%>
+            <%--alert("数额不足亲")--%>
+            <%--a=0;--%>
+        <%--}--%>
+    <%--}--%>
+<%--</script>--%>
 </html>

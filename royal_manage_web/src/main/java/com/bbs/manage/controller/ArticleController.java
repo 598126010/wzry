@@ -9,6 +9,7 @@ import jdk.nashorn.internal.ir.RuntimeNode;
 import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,9 +56,13 @@ public class ArticleController {
     }
     //更改帖子屏蔽状态
     @RequestMapping("/changeStatus.do")
-    public String changeStatus(int id,int status,int page){
+    public String changeStatus(int id,int status,int page,Model model,
+                               @RequestParam(name="title",required=true,defaultValue="")String title,
+                               @RequestParam(name="senderName",required=true,defaultValue="")String senderName){
         manager_articleService.isReportStatus(id,status);
         manager_articleService.topStatus(id,status);
+        model.addAttribute("title",title);
+        model.addAttribute("senderName",senderName);
         return "redirect:/article/findByPage.do?page="+page;
 
     }
@@ -127,13 +132,13 @@ public class ArticleController {
     //    改变敏感词启用状态
     @RequestMapping("/wordStatus.do")
 //    @ResponseBody
-    public String changeWordStatus(int page,
-                                   int id,
-                                   int status){
+    public String changeWordStatus(int id,
+                                   int status,
+                                   @RequestParam("page")int page){
 
         manager_articleService.changeWordStatus(id,status);
 
-        return "redirect:/article/SensitiveWordsPage.do?page="+page;
+        return "redirect:/article/SensitiveWordsPage.do";
     }
 
     //    添加敏感词

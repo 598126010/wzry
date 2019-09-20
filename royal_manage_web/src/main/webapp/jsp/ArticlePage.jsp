@@ -104,12 +104,12 @@
                                 <td width="5%">${article.zone.zoneName}</td>
 
                                 <td width="15%">
-                                    <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=2" role="button" class="btn btn-primary">屏蔽</a>
+                                    <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=2&title=${title}&senderName=${senderName}" role="button" class="btn btn-primary">屏蔽</a>
                                     <c:if test="${article.isReport==0||article.isReport==1}">
-                                        <a href="${pageContext.request.contextPath}/article/setTop.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=1" role="button" class="btn btn-danger" >置顶</a>
+                                        <a href="${pageContext.request.contextPath}/article/setTop.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=1&title=${title}&senderName=${senderName}" role="button" class="btn btn-danger" >置顶</a>
                                     </c:if>
                                     <c:if test="${article.isReport==2}">
-                                        <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=0" role="button" class="btn btn-info" >取消</a>
+                                        <a href="${pageContext.request.contextPath}/article/changeStatus.do?id=${article.articleId}&page=${articleMsgs.pageNum}&status=0&title=${title}&senderName=${senderName}" role="button" class="btn btn-info" >取消</a>
                                     </c:if>
                                 </td>
                             </tr>

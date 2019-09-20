@@ -88,6 +88,8 @@
                                     <%--</c:if>--%>
                                     <%--<c:if test="${a}==1">--%>
                                 <%--<a href="${pageContext.request.contextPath}/article/changeReport.do?id=${report.articleId}&page=${reportMsgs.pageNum}&status=0" onclick="ganxie()" role="button" class="btn btn-info" >一键洗白</a>--%>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#article_detail"
+                                                onclick="article_Detail(${report.articleId})">相关帖子</button>
                                 <a onclick="ganxie(${report.articleId})" role="button" class="btn btn-info" >一键洗白</a>
                                     <%--</c:if>--%>
                                     <%--<c:if test="${a}==0">--%>
@@ -169,6 +171,22 @@
             alert("数额不足亲")
 
         }
+    }
+    <%--相关帖子查询的ajax--%>
+    function article_Detail(articleId) {
+        $.ajax({
+            url:"${pageContext.request.contextPath}/article/findArticleById.do",
+            type:"POST",
+            data:{"articleId":articleId},
+            dataType:"json",
+            success:function (data) {
+                $("#detail_content").val(data.content);
+                $("#detail_title").val(data.title);
+            },
+            error:function () {
+                alert("服务器正忙")
+            },
+        })
     }
 </script>
 </html>

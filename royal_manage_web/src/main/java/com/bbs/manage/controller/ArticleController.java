@@ -138,11 +138,11 @@ public class ArticleController {
 //    @ResponseBody
     public String changeWordStatus(int id,
                                    int status,
-                                   @RequestParam("page")int page){
+                                   int page){
 
         manager_articleService.changeWordStatus(id,status);
 
-        return "redirect:/article/SensitiveWordsPage.do";
+        return "redirect:/article/SensitiveWordsPage.do?page="+page;
     }
 
     //    添加敏感词

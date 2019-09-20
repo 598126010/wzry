@@ -116,6 +116,11 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.findCommentByReplyId(commentId);
     }
 
+    @Override
+    public int getMaxId() {
+        return articleDao.getMaxId();
+    }
+
     //关键字搜索
     @Override
     public void addUpvoteCount(String articleId) {

@@ -64,7 +64,7 @@ public class ArticleController {
         for (Word word : wordList) {
             //遍历内容
             for (Article article : list) {
-                if (word.getStatus() == 0) {
+                if (word.getStatus() == 1) {
                     //过滤内容
                     if (article.getContent().contains(word.getWord())) {
                         String content = article.getContent();
@@ -119,7 +119,7 @@ public class ArticleController {
         //遍历敏感词
         for (Word word : wordList) {
             //遍历内容
-            if (word.getStatus() == 0) {
+            if (word.getStatus() == 1) {
                 for (Comment comment : commentList) {
                     //过滤评论
                     if (comment.getCommentContent().contains(word.getWord())) {
@@ -166,7 +166,8 @@ public class ArticleController {
     public String createNewArticle(Article article){
         //根据获取的article对象执行保存操作
         articleService.createNewArticle(article);
-        return "redirect:findArticleListByZoneId.do?zoneId="+article.getZoneId();
+        int  i = articleService.getMaxId();
+        return "redirect:getArticle.do?articleId="+i;
     }
 
     //今日帖子统计

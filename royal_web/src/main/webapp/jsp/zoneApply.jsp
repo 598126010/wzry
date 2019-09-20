@@ -90,7 +90,7 @@
                     <c:if test="${user.role == 1}">
                         <li class="cur"><a href="${pageContext.request.contextPath}/user/findUserApply.do">申请高级用户</a></li>
                     </c:if>
-                    <c:if test="${user.role == 2}">
+                    <c:if test="${user.role == 2 || user.role == 3 }">
                         <li class="cur"><a href="${pageContext.request.contextPath}/user/findZoneApply.do">开辟新版块</a></li>
                     </c:if>
                 </ul>

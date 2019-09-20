@@ -30,7 +30,7 @@
         </div>
         <div class="hm-header-b">
             <i class="hm-ico-home"></i>
-            <a href="index.do">首页</a><span>></span>注册页面
+            <a href="${pageContext.request.contextPath}/index.jsp">首页</a><span>></span>注册页面
         </div>
     </div>
 </div>
@@ -89,7 +89,9 @@
 <jsp:include page="common/footer.jsp"/>
 
 <script>
+    var flag;
    $(function () {
+
        $("#username").blur(function () {
            var username = $("#username").val();
            //用户名必须是由英文、数字、下划线组成
@@ -104,6 +106,7 @@
                       $("#checkoutUsername").html("用户名可使用")
                   } else if (!data.result) {
                       $("#checkoutUsername").html("用户名已被使用")
+
                   }
               },"json")
 
@@ -121,7 +124,7 @@
            if (!reslut){
                $("#checkoutPasswrod").html("密码格式不正确")
            }else {
-               $("#checkoutPasswrod").html("密码正确")
+               $("#checkoutPasswrod").html("密码格式正确")
 
            }
            }else {
@@ -139,11 +142,12 @@
            }
            }else if (email == "") {
                $("#checkoutEmail").html("")
+               flag = true;
            }
        })
    })
        function submitForm() {
-           //alert("11")
+
            var email = $("#email").val();
            var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
            var emailStatus = reg.test(email);
@@ -153,7 +157,7 @@
            var password = $("#password").val();
            var reg = /^[a-zA-Z0-9_]{6,10}$/;
            var passwordStatus = reg.test(password);
-           if (passwordStatus && usernameStatus && emailStatus) {
+           if (passwordStatus && usernameStatus && emailStatus && flag) {
                $("#registerForm").submit();
                return;
            } else {

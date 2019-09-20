@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Manage_UserService{
 //用户、用户组管理功能
-    List<UserInfo> findByPage(int page,int size,String userName, Integer role);
+    List<UserInfo> findByPage(int page,int size,String userName, int role);
 
     void shengji(String id);
 

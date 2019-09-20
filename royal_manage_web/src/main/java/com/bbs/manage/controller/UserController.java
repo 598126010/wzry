@@ -36,9 +36,9 @@ public class UserController {
     }
 //    禁言/恢复
     @RequestMapping("/jingyan.do")
-    public String jingyan(int userId,int talkStatus,Integer page){
+    public String jingyan(int userId,int talkStatus,Integer lastPage){
         manage_userService.jingyan(userId,talkStatus);
-        return "redirect:/user/findByPage.do?page="+page;
+        return "redirect:/user/findByPage.do?page="+lastPage;
     }
     //管理所有用户
     @RequestMapping("manageAllUser.do")

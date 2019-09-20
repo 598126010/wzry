@@ -5,8 +5,6 @@ import com.bbs.domain.Report;
 import com.bbs.domain.Word;
 import com.bbs.service.manager_ArticleService;
 import com.github.pagehelper.PageInfo;
-import jdk.nashorn.internal.ir.RuntimeNode;
-import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -147,11 +143,11 @@ public class ArticleController {
 
     //    添加敏感词
     @RequestMapping("/addWords.do")
-    public String addWords(@RequestParam("addword")String word){
+    public String addWords(@RequestParam("addword")String word,int lastPage){
 
         manager_articleService.addWords(word);
 
-        return "redirect:/article/SensitiveWordsPage.do";
+        return "redirect:/article/SensitiveWordsPage.do?page="+lastPage;
 
     }
 

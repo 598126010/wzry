@@ -158,7 +158,7 @@
 </body>
 <script>
     function ganxie(id) {
-        var chongzhi=prompt("请输入充值数额");
+        var chongzhi=prompt("请输入充值数额,需大于66.6哦");
         if (chongzhi!=null&chongzhi>66.6)
         {
 

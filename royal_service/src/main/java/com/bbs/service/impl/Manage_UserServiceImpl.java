@@ -14,12 +14,10 @@ public class Manage_UserServiceImpl implements Manage_UserService {
     @Autowired
     Manage_UserDao manage_userDao;
     @Override
-    public List<UserInfo> findByPage(int page,int size,String userName, Integer role) {
+    public List<UserInfo> findByPage(int page,int size,String userName, int role) {
         PageHelper.startPage(page,size);
         return  manage_userDao.mohu(userName,role);
     }
-
-
     //
     @Override
     public void shengji(String id) {

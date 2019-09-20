@@ -42,4 +42,6 @@ public interface ArticleService {
     void addReplyCount(Integer articleId);
 
     Comment findCommentByReplyId(Integer commentId);
+
+    int getMaxId();
 }

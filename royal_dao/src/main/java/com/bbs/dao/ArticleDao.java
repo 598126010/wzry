@@ -113,4 +113,6 @@ public interface ArticleDao {
     void addReportCount(Integer articleId);
     @Select("SELECT * FROM bbs_comment_table GROUP BY articleId HAVING commentId = #{commentId} ")
     Comment findCommentByReplyId(Integer commentId);
+    @Select("select max(articleId) from bbs_article_table  ")
+    int getMaxId();
 }

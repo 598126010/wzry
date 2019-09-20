@@ -100,18 +100,22 @@ public class ArticleController {
         PageInfo pageInfo = new PageInfo(Reports);
 
         mv.addObject("reportMsgs",pageInfo);
+//        mv.addObject()
 
         mv.setViewName("dealedReportPage");
         return mv;
     }
     //    举报处理
     @RequestMapping("/changeReport.do")
-    public String changeReport(int id,int status,int page){
+    public String changeReport(int id,
+                               int status,
+                               int page){
 
         manager_articleService.dealReportStatus(id,status);
         manager_articleService.isReportStatus(id,status);
+//        model.addAttribute("page",page);
 
-        return "redirect:/article/reportPage.do?page="+page;
+        return "redirect:/article/dealedReport.do?&page"+page;
     }
     //    查询所有敏感词汇并分页
     @RequestMapping("/SensitiveWordsPage.do")
